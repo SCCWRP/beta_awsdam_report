@@ -28,6 +28,22 @@ shinyApp(
     
     hr(), # adds divider
     
+    textInput("boundary", label = h5("Reach Boundaries"), value = "Enter text..."), # text input box
+    textInput("lat", label = h5("Latitude at downstream end (d.ddddd N)"), value = "Enter text..."), # text input box
+    textInput("lon", label = h5("Longitude at downstream end (d.ddddd E)"), value = "Enter text..."), # text input box
+    textInput("datum", label = h5("Datum"), value = "Enter text..."), # text input box
+    textInput("weather", label = h5("Weather"), value = "Enter text..."), # text input box
+    textInput("situation", label = h5("Site Disturbance/Difficulties"), value = "Enter text..."), # text input box
+    textInput("use", label = h5("Surrounding Land Use"), value = "Enter text..."), # text input box
+    textInput("surfflow", label = h5("Percent of Reach with Surface Flows"), value = "Enter text..."), # text input box
+    textInput("subflow", label = h5("Percent of Reach with Surface and Sub-Surface Flows"), value = "Enter text..."), # text input box
+    textInput("pool", label = h5("Number of Isolated Pools"), value = "Enter text..."), # text input box
+    textInput("bank", label = h5("Average Bankwidth (m)"), value = "Enter text..."), # text input box
+    textInput("recreach", label = h5("Recommended Reach Length (m)"), value = "Enter text..."), # text input box
+    textInput("actreach", label = h5("Actual Reach Length (m)"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
     downloadButton("report", "Generate report")
   ),
   
@@ -49,7 +65,20 @@ shinyApp(
           b = input$assessor,
           c = input$address,
           d = input$waterway,
-          e = input$date)
+          e = input$date,
+          f = input$boundary,
+          g = input$lat,
+          h = input$lon,
+          i = input$datum,
+          j = input$weather,
+          k = input$situation,
+          l = input$use,
+          m = input$surfflow,
+          n = input$subflow,
+          o = input$pool,
+          p = input$bank,
+          q = input$recreach,
+          r = input$actreach)
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document

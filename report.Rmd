@@ -9,6 +9,19 @@ params:
   c: NA
   d: NA
   e: NA
+  f: NA
+  g: NA
+  h: NA
+  i: NA
+  j: NA
+  k: NA
+  l: NA
+  m: NA
+  n: NA
+  o: NA
+  p: NA
+  q: NA
+  r: NA
 ---
 
 ```{r, setup, include=FALSE}
@@ -43,4 +56,71 @@ params$d
 Assessment date:
 ```{r}
 params$e
+```
+
+**Determination:**
+```{r}
+# INSERT RF MODEL OUTPUT HERE.
+```
+
+***
+Reach boundaries:
+```{r}
+params$f
+```
+
+Latitude, Longitude at downstream end (d.ddddd N, d.ddddd E):
+```{r}
+params$g 
+params$h
+```
+
+Datum:
+```{r}
+params$i
+```
+
+Weather:
+```{r}
+params$j
+```
+
+Disturbed site/difficult situation:
+```{r}
+params$k
+```
+
+Surrounding land use:
+```{r}
+params$l
+```
+
+Percent of reach with surface flows:
+```{r}
+params$m
+```
+
+Percent of reach with surface and sub-surface flows:
+```{r}
+params$n
+```
+
+Number of isolated pools:
+```{r}
+params$o
+```
+
+Average bankwidth (m):
+```{r}
+params$p
+```
+
+Recommended reach length (m):
+```{r}
+params$q
+```
+
+Actual reach length (m):
+```{r}
+params$r
 ```
