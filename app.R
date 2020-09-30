@@ -44,6 +44,10 @@ shinyApp(
     
     hr(), # adds divider
     
+    fileInput("blu", label = h5("Site Photo - Bottom Looking Up")), # file input box
+    
+    hr(), # adds divider
+    
     textInput("checklist", label = h5("Checklist Used"), value = "Enter text..."), # text input box
     textInput("hydro", label = h5("Number of Hydrophytes"), value = "Enter text..."), # text input box
     
@@ -73,8 +77,12 @@ shinyApp(
 # Server ------------------------------------------------------------------
 
   server = function(input, output) {
+    
+    # Need to process figures separately.
+    fig1 <- reactive({gsub("\\\\", "/", input$blu$datapath)})
+    
     output$report <- downloadHandler(
-      filename = "report.pdf",
+      filename = "AWSDAM_report.pdf",
       content = function(file) {
         # Copy the report file to a temporary directory before processing it, in
         # case we don't have write permissions to the current working dir (which
@@ -101,6 +109,7 @@ shinyApp(
           p = input$bank,
           q = input$recreach,
           r = input$actreach,
+          s = fig1(),
           x = input$checklist,
           ai = input$abundance,
           aj = input$ept,
@@ -122,6 +131,7 @@ shinyApp(
       }
     )
   }
+  
 )
 
 # End of R Shiny app script.

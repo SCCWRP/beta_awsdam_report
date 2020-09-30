@@ -22,6 +22,7 @@ params:
   p: NA
   q: NA
   r: NA
+  s: NA
   x: NA
   ai: NA
   aj: NA
@@ -140,7 +141,7 @@ params$r
 
 Bottom looking up:
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(s)
+knitr::include_graphics(params[["s"]])
 ```
 
 Middle looking down:
