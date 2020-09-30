@@ -14,7 +14,7 @@ shinyApp(
   ui = fluidPage(
     
     # App title
-    titlePanel("Field form for the Arid West Streamflow Duration Assessment Method"),
+    titlePanel("Field Form for Arid West Streamflow Duration Assessment Method"),
     
     # Title panel subtext
     tags$div(
@@ -41,6 +41,28 @@ shinyApp(
     textInput("bank", label = h5("Average Bankwidth (m)"), value = "Enter text..."), # text input box
     textInput("recreach", label = h5("Recommended Reach Length (m)"), value = "Enter text..."), # text input box
     textInput("actreach", label = h5("Actual Reach Length (m)"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
+    textInput("checklist", label = h5("Checklist Used"), value = "Enter text..."), # text input box
+    textInput("hydro", label = h5("Number of Hydrophytes"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
+    textInput("abundance", label = h5("Aquatic Invertebrates Abundance"), value = "Enter text..."), # text input box
+    textInput("ept", label = h5("EPT Present"), value = "Enter text..."), # text input box
+    textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
+    textInput("invnotes", label = h5("Notes about Aquatic Invertebrates"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
+    textInput("algae", label = h5("Live or Dead Algae"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
+    textInput("fish", label = h5("Fish Observed"), value = "Enter text..."), # text input box
+    textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
+    textInput("snake", label = h5("Aquatic Snakes Observed"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
@@ -78,7 +100,17 @@ shinyApp(
           o = input$pool,
           p = input$bank,
           q = input$recreach,
-          r = input$actreach)
+          r = input$actreach,
+          x = input$checklist,
+          ai = input$abundance,
+          aj = input$ept,
+          ak = input$invtaxa,
+          an = input$invnotes,
+          ao = input$algae,
+          aq = input$fish,
+          as = input$amph,
+          at = input$snake,
+          av = input$hydro)
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document

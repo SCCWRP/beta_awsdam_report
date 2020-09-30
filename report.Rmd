@@ -1,7 +1,7 @@
 ---
-title: "Field form for the Arid West Streamflow Duration Assessment Method"
-author: "Southern California Coastal Water Research Project"
-date: "Report generated on:`r format(Sys.time(), '%B %d, %Y')`"
+title: "Field Form for Arid West Streamflow Duration Assessment Method"
+author: "developed by the Southern California Coastal Water Research Project"
+date: "Report generated on: `r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 params:
   a: NA
@@ -22,6 +22,17 @@ params:
   p: NA
   q: NA
   r: NA
+  x: NA
+  ai: NA
+  aj: NA
+  ak: NA
+  an: NA
+  ao: NA
+  aq: NA
+  as: NA
+  at: NA
+  av: NA
+  
 ---
 
 ```{r, setup, include=FALSE}
@@ -124,3 +135,128 @@ Actual reach length (m):
 ```{r}
 params$r
 ```
+
+### Site photos
+
+Bottom looking up:
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(s)
+```
+
+Middle looking down:
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(t)
+```
+
+Middle looking up:
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(u)
+```
+
+Top looking down:
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(v)
+```
+
+Site sketch:
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(w)
+```
+
+### Hydrophytes
+
+Checklist:
+```{r}
+params$x
+```
+
+Number of hydrophytes reported:
+```{r}
+params$av
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(aa)
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(ac)
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(ae)
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(ag)
+```
+
+### Aquatic invertebrates
+
+Abundance:
+```{r}
+params$ai
+```
+
+EPT present:
+```{r}
+params$aj
+```
+
+Invertebrate taxa observed:
+```{r}
+params$ak
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(al)
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(am)
+```
+
+Notes about aquatic invertebrates:
+```{r}
+params$an
+```
+
+### Algae cover
+
+Live or dead algae:
+```{r}
+params$ao
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(ap)
+```
+
+### Vertebrates
+
+Fish observed:
+```{r}
+params$aq
+```
+
+```{r, out.width='25%', fig.align='center'}
+#knitr::include_graphics(ar)
+```
+
+Aquatic amphibians observed:
+```{r}
+params$as
+```
+
+Aquatic snakes observed:
+```{r}
+params$at
+```
+
+### Additional photo(s)
+
+```{r}
+# INSERT ADDITIONAL PHOTOS SECTION HERE.
+```
+
+***
