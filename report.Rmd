@@ -28,15 +28,24 @@ params:
   v: NA
   w: NA
   x: NA
+  aa: NA
+  ac: NA
+  ae: NA
+  ag: NA
   ai: NA
   aj: NA
   ak: NA
+  al: NA
+  am: NA
   an: NA
   ao: NA
+  ap: NA
   aq: NA
+  ar: NA
   as: NA
   at: NA
   av: NA
+  ba: NA
   
 ---
 
@@ -181,19 +190,19 @@ params$av
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(aa)
+knitr::include_graphics(params[["aa"]])
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(ac)
+knitr::include_graphics(params[["ac"]])
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(ae)
+knitr::include_graphics(params[["ae"]])
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(ag)
+knitr::include_graphics(params[["ag"]])
 ```
 
 ### Aquatic invertebrates
@@ -214,11 +223,11 @@ params$ak
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(al)
+knitr::include_graphics(params[["al"]])
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(am)
+knitr::include_graphics(params[["am"]])
 ```
 
 Notes about aquatic invertebrates:
@@ -234,7 +243,7 @@ params$ao
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(ap)
+knitr::include_graphics(params[["ap"]])
 ```
 
 ### Vertebrates
@@ -245,7 +254,7 @@ params$aq
 ```
 
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(ar)
+knitr::include_graphics(params[["ar"]])
 ```
 
 Aquatic amphibians observed:
@@ -260,8 +269,8 @@ params$at
 
 ### Additional photo(s)
 
-```{r}
-# INSERT ADDITIONAL PHOTOS SECTION HERE.
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["ba"]])
 ```
 
 ***

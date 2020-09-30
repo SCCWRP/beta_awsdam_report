@@ -54,27 +54,37 @@ shinyApp(
     
     textInput("checklist", label = h5("Checklist Used"), value = "Enter text..."), # text input box
     textInput("hydro", label = h5("Number of Hydrophytes"), value = "Enter text..."), # text input box
+    fileInput("hyd1", label = h5("Hydrophyte Photo #1")), # file input box
+    fileInput("hyd2", label = h5("Hydrophyte Photo #2")), # file input box
+    fileInput("hyd3", label = h5("Hydrophyte Photo #3")), # file input box
+    fileInput("hyd4", label = h5("Hydrophyte Photo #4")), # file input box
     
     hr(), # adds divider
     
     textInput("abundance", label = h5("Aquatic Invertebrates Abundance"), value = "Enter text..."), # text input box
     textInput("ept", label = h5("EPT Present"), value = "Enter text..."), # text input box
     textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
+    fileInput("inv1", label = h5("Invertebrate Photo #1")), # file input box
+    fileInput("inv2", label = h5("Invertebrate Photo #2")), # file input box
     textInput("invnotes", label = h5("Notes about Aquatic Invertebrates"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
     textInput("algae", label = h5("Live or Dead Algae"), value = "Enter text..."), # text input box
+    fileInput("alg1", label = h5("Algae Photo #1")), # file input box
     
     hr(), # adds divider
     
     textInput("fish", label = h5("Fish Observed"), value = "Enter text..."), # text input box
+    fileInput("fish1", label = h5("Fish Photo #1")), # file input box
     textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
     textInput("snake", label = h5("Aquatic Snakes Observed"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
-    downloadButton("report", "Generate report")
+    fileInput("add1", label = h5("Additional Photo #1")), # file input box
+    
+    downloadButton("report", "Generate report.")
   ),
   
 
@@ -83,11 +93,26 @@ shinyApp(
   server = function(input, output) {
     
     # Need to process figures separately.
+    # Site photos
     fig1 <- reactive({gsub("\\\\", "/", input$blu$datapath)})
     fig2 <- reactive({gsub("\\\\", "/", input$mld$datapath)})
     fig3 <- reactive({gsub("\\\\", "/", input$mlu$datapath)})
     fig4 <- reactive({gsub("\\\\", "/", input$tld$datapath)})
     fig5 <- reactive({gsub("\\\\", "/", input$sketch$datapath)})
+    # Hydrophyte photos
+    fig6 <- reactive({gsub("\\\\", "/", input$hyd1$datapath)})
+    fig7 <- reactive({gsub("\\\\", "/", input$hyd2$datapath)})
+    fig8 <- reactive({gsub("\\\\", "/", input$hyd3$datapath)})
+    fig9 <- reactive({gsub("\\\\", "/", input$hyd4$datapath)})
+    # Invertebrate photos
+    fig10 <- reactive({gsub("\\\\", "/", input$inv1$datapath)})
+    fig11 <- reactive({gsub("\\\\", "/", input$inv2$datapath)})
+    # Algae photos
+    fig12 <- reactive({gsub("\\\\", "/", input$alg1$datapath)})
+    # Fish photos
+    fig13 <- reactive({gsub("\\\\", "/", input$fish1$datapath)})
+    # Additional photos
+    fig14 <- reactive({gsub("\\\\", "/", input$add1$datapath)})
     
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
@@ -123,15 +148,24 @@ shinyApp(
           v = fig4(),
           w = fig5(),
           x = input$checklist,
+          aa = fig6(),
+          ac = fig7(),
+          ae = fig8(),
+          ag = fig9(),
           ai = input$abundance,
           aj = input$ept,
           ak = input$invtaxa,
+          al = fig10(),
+          am = fig11(),
           an = input$invnotes,
           ao = input$algae,
+          ap = fig12(),
           aq = input$fish,
+          ar = fig13(),
           as = input$amph,
           at = input$snake,
-          av = input$hydro)
+          av = input$hydro,
+          ba = fig14())
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
