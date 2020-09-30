@@ -4,7 +4,11 @@ author: "Southern California Coastal Water Research Project"
 date: "Report generated on:`r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 params:
-  n: NA
+  a: NA
+  b: NA
+  c: NA
+  d: NA
+  e: NA
 ---
 
 ```{r, setup, include=FALSE}
@@ -18,5 +22,25 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Project name or number:
 ```{r}
-params$n
+params$a
+```
+
+Assessor(s):
+```{r}
+params$b
+```
+
+Site address:
+```{r}
+params$c
+```
+
+Waterway name:
+```{r}
+params$d
+```
+
+Assessment date:
+```{r}
+params$e
 ```

@@ -20,7 +20,11 @@ shinyApp(
     tags$div(
       "This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."),
     
-    textInput("project", label = h3("Project Name or Number"), value = "Enter text..."), # text input box
+    textInput("project", label = h5("Project Name or Number"), value = "Enter text..."), # text input box
+    textInput("assessor", label = h5("Assessor(s)"), value = "Enter text..."), # text input box
+    textInput("address", label = h5("Site Address"), value = "Enter text..."), # text input box
+    textInput("waterway", label = h5("Waterway Name"), value = "Enter text..."), # text input box
+    textInput("date", label = h5("Assessment Date"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
@@ -41,7 +45,11 @@ shinyApp(
         file.copy("report.Rmd", tempReport, overwrite = TRUE)
         
         # Set up parameters to pass to Rmd document
-        params <- list(n = input$project)
+        params <- list(a = input$project,
+          b = input$assessor,
+          c = input$address,
+          d = input$waterway,
+          e = input$date)
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
