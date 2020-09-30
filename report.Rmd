@@ -1,0 +1,24 @@
+---
+title: "Field form for the Arid West Streamflow Duration Assessment Method"
+author: "Southern California Coastal Water Research Project"
+date: "9/30/2020"
+output: pdf_document
+params:
+  n: NA
+---
+
+```{r, setup, include=FALSE}
+
+# Removing all code from appearing in the final knit document.
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+### General Site Information
+
+Project name or number:
+```{r}
+
+# Insert first parameter here.
+
+```
