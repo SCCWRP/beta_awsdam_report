@@ -1,7 +1,7 @@
 ---
 title: "Field form for the Arid West Streamflow Duration Assessment Method"
 author: "Southern California Coastal Water Research Project"
-date: "9/30/2020"
+date: "Report generated on:`r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 params:
   n: NA
@@ -18,7 +18,5 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Project name or number:
 ```{r}
-
-# Insert first parameter here.
-
+params$n
 ```
