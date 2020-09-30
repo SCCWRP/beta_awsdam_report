@@ -23,6 +23,10 @@ params:
   q: NA
   r: NA
   s: NA
+  t: NA
+  u: NA
+  v: NA
+  w: NA
   x: NA
   ai: NA
   aj: NA
@@ -146,22 +150,22 @@ knitr::include_graphics(params[["s"]])
 
 Middle looking down:
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(t)
+knitr::include_graphics(params[["t"]])
 ```
 
 Middle looking up:
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(u)
+knitr::include_graphics(params[["u"]])
 ```
 
 Top looking down:
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(v)
+knitr::include_graphics(params[["v"]])
 ```
 
 Site sketch:
 ```{r, out.width='25%', fig.align='center'}
-#knitr::include_graphics(w)
+knitr::include_graphics(params[["w"]])
 ```
 
 ### Hydrophytes

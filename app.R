@@ -45,6 +45,10 @@ shinyApp(
     hr(), # adds divider
     
     fileInput("blu", label = h5("Site Photo - Bottom Looking Up")), # file input box
+    fileInput("mld", label = h5("Site Photo - Middle Looking Down")), # file input box
+    fileInput("mlu", label = h5("Site Photo - Middle Looking Up")), # file input box
+    fileInput("tld", label = h5("Site Photo - Top Looking Down")), # file input box
+    fileInput("sketch", label = h5("Site Sketch")), # file input box
     
     hr(), # adds divider
     
@@ -80,6 +84,10 @@ shinyApp(
     
     # Need to process figures separately.
     fig1 <- reactive({gsub("\\\\", "/", input$blu$datapath)})
+    fig2 <- reactive({gsub("\\\\", "/", input$mld$datapath)})
+    fig3 <- reactive({gsub("\\\\", "/", input$mlu$datapath)})
+    fig4 <- reactive({gsub("\\\\", "/", input$tld$datapath)})
+    fig5 <- reactive({gsub("\\\\", "/", input$sketch$datapath)})
     
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
@@ -110,6 +118,10 @@ shinyApp(
           q = input$recreach,
           r = input$actreach,
           s = fig1(),
+          t = fig2(),
+          u = fig3(),
+          v = fig4(),
+          w = fig5(),
           x = input$checklist,
           ai = input$abundance,
           aj = input$ept,
