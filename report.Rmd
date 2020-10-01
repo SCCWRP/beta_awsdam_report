@@ -20,7 +20,6 @@ params:
   n: NA
   o: NA
   p: NA
-  q: NA
   r: NA
   s: NA
   t: NA
@@ -29,9 +28,13 @@ params:
   w: NA
   x: NA
   aa: NA
+  ab: NA
   ac: NA
+  ad: NA
   ae: NA
+  af: NA
   ag: NA
+  ah: NA
   ai: NA
   aj: NA
   ak: NA
@@ -46,6 +49,13 @@ params:
   at: NA
   av: NA
   ba: NA
+  bb: NA
+  bc: NA
+  bd: NA
+  be: NA
+  bf: NA
+  bg: NA
+  rf: NA
   
 ---
 
@@ -56,11 +66,16 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-### General Site Information
+## General Site Information
 
 Project name or number:
 ```{r}
 params$a
+```
+
+Site code or identifier:
+```{r}
+params$c
 ```
 
 Assessor(s):
@@ -68,36 +83,32 @@ Assessor(s):
 params$b
 ```
 
-Site address:
-```{r}
-params$c
-```
-
 Waterway name:
 ```{r}
 params$d
 ```
 
-Assessment date:
+Visit date:
 ```{r}
 params$e
 ```
 
-**Determination:**
+## Classification:
+
 ```{r}
-# INSERT RF MODEL OUTPUT HERE.
+params[["rf"]]
 ```
 
 ***
-Reach boundaries:
+
+Weather conditions:
 ```{r}
-params$f
+params$j
 ```
 
-Latitude, Longitude at downstream end (d.ddddd N, d.ddddd E):
+Location:
 ```{r}
-params$g 
-params$h
+paste0(params$g,",", params$h) 
 ```
 
 Datum:
@@ -105,9 +116,24 @@ Datum:
 params$i
 ```
 
-Weather:
+Surrounding land use within 100 m:
 ```{r}
-params$j
+params$l
+```
+
+Reach boundaries:
+```{r}
+params$f
+```
+
+Mean channel width (m):
+```{r}
+params$p
+```
+
+Reach length (m):
+```{r}
+params$r
 ```
 
 Disturbed site/difficult situation:
@@ -115,12 +141,9 @@ Disturbed site/difficult situation:
 params$k
 ```
 
-Surrounding land use:
-```{r}
-params$l
-```
+Observed hydrology:
 
-Percent of reach with surface flows:
+Percent of reach with surface flow:
 ```{r}
 params$m
 ```
@@ -135,49 +158,35 @@ Number of isolated pools:
 params$o
 ```
 
-Average bankwidth (m):
-```{r}
-params$p
-```
+## Site photos
 
-Recommended reach length (m):
-```{r}
-params$q
-```
-
-Actual reach length (m):
-```{r}
-params$r
-```
-
-### Site photos
-
-Bottom looking up:
-```{r, out.width='25%', fig.align='center'}
-knitr::include_graphics(params[["s"]])
-```
-
-Middle looking down:
-```{r, out.width='25%', fig.align='center'}
-knitr::include_graphics(params[["t"]])
-```
-
-Middle looking up:
-```{r, out.width='25%', fig.align='center'}
-knitr::include_graphics(params[["u"]])
-```
-
-Top looking down:
+Top of reach looking downstream:
 ```{r, out.width='25%', fig.align='center'}
 knitr::include_graphics(params[["v"]])
 ```
 
-Site sketch:
+Middle of reach looking upstream:
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["u"]])
+```
+
+Middle of reach looking downstream:
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["t"]])
+```
+
+Bottom of reach looking upstream:
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["s"]])
+```
+
+## Site Sketch
+
 ```{r, out.width='25%', fig.align='center'}
 knitr::include_graphics(params[["w"]])
 ```
 
-### Hydrophytes
+## Hydrophytic Vegetation
 
 Checklist:
 ```{r}
@@ -189,30 +198,51 @@ Number of hydrophytes reported:
 params$av
 ```
 
-```{r, out.width='25%', fig.align='center'}
+```{r, out.width='25%', fig.align='center', fig.cap=params$ab}
 knitr::include_graphics(params[["aa"]])
 ```
 
-```{r, out.width='25%', fig.align='center'}
+```{r, out.width='25%', fig.align='center', fig.cap=params$ad}
 knitr::include_graphics(params[["ac"]])
 ```
 
-```{r, out.width='25%', fig.align='center'}
+```{r, out.width='25%', fig.align='center', fig.cap=params$af}
 knitr::include_graphics(params[["ae"]])
 ```
 
-```{r, out.width='25%', fig.align='center'}
+```{r, out.width='25%', fig.align='center', fig.cap=params$ah}
 knitr::include_graphics(params[["ag"]])
 ```
 
-### Aquatic invertebrates
+General notes about hydrophytic vegetation:
+```{r}
+params$bc
+```
 
-Abundance:
+## Algae cover
+
+Cover of live or dead algal mats in streambed:
+```{r}
+params$ao
+```
+
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["ap"]])
+```
+
+General notes about algae:
+```{r}
+params$bb
+```
+
+## Aquatic invertebrates
+
+Number of individuals observed:
 ```{r}
 params$ai
 ```
 
-EPT present:
+Are mayflies, stoneflies, or caddisflies present?
 ```{r}
 params$aj
 ```
@@ -230,23 +260,12 @@ knitr::include_graphics(params[["al"]])
 knitr::include_graphics(params[["am"]])
 ```
 
-Notes about aquatic invertebrates:
+General notes about aquatic invertebrates:
 ```{r}
 params$an
 ```
 
-### Algae cover
-
-Live or dead algae:
-```{r}
-params$ao
-```
-
-```{r, out.width='25%', fig.align='center'}
-knitr::include_graphics(params[["ap"]])
-```
-
-### Vertebrates
+## Single indicators
 
 Fish observed:
 ```{r}
@@ -255,6 +274,11 @@ params$aq
 
 ```{r, out.width='25%', fig.align='center'}
 knitr::include_graphics(params[["ar"]])
+```
+
+General notes about fish:
+```{r}
+params$bd
 ```
 
 Aquatic amphibians observed:
@@ -267,10 +291,20 @@ Aquatic snakes observed:
 params$at
 ```
 
-### Additional photo(s)
+## Other indicators
+```{r}
+params$bf
+```
 
-```{r, out.width='25%', fig.align='center'}
+## Additional photo(s)
+
+```{r, out.width='25%', fig.align='center', fig.cap = params$be}
 knitr::include_graphics(params[["ba"]])
+```
+
+## Other indicators
+```{r}
+params$bg
 ```
 
 ***
