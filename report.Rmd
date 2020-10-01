@@ -64,98 +64,102 @@ params:
 # Removing all code from appearing in the final knit document.
 knitr::opts_chunk$set(echo = FALSE)
 
+# Removing all "#" from appearing in the final knit document.
+knitr::opts_chunk$set(comment = NA)
+
 ```
 
 ## General Site Information
 
 Project name or number:
 ```{r}
-params$a
+# Adding cat() to all of the outputs to remove the [1] that would otherwise print immediately before them.
+cat(params$a)
 ```
 
 Site code or identifier:
 ```{r}
-params$c
+cat(params$c)
 ```
 
 Assessor(s):
 ```{r}
-params$b
+cat(params$b)
 ```
 
 Waterway name:
 ```{r}
-params$d
+cat(params$d)
 ```
 
 Visit date:
 ```{r}
-params$e
+cat(params$e)
 ```
 
 ## Classification:
 
 ```{r}
-params[["rf"]]
+cat(params[["rf"]])
 ```
 
 ***
 
 Weather conditions:
 ```{r}
-params$j
+cat(params$j)
 ```
 
 Location:
 ```{r}
-paste0(params$g," N, ", params$h, " E")
+cat(paste0(params$g," N, ", params$h, " E"))
 ```
 
 Datum:
 ```{r}
-params$i
+cat(params$i)
 ```
 
 Surrounding land use within 100 m:
 ```{r}
-params$l
+cat(params$l)
 ```
 
 Reach boundaries:
 ```{r}
-params$f
+cat(params$f)
 ```
 
 Mean channel width (m):
 ```{r}
-params$p
+cat(params$p)
 ```
 
 Reach length (m):
 ```{r}
-params$r
+cat(params$r)
 ```
 
 Disturbed site/difficult situation:
 ```{r}
-params$k
+cat(params$k)
 ```
 
 Observed hydrology:
 
 Percent of reach with surface flow:
 ```{r}
-params$m
+cat(params$m)
 ```
 
 Percent of reach with surface and sub-surface flows:
 ```{r}
-params$n
+cat(params$n)
 ```
 
 Number of isolated pools:
 ```{r}
-params$o
+cat(params$o)
 ```
 
 ## Site photos
@@ -190,12 +194,12 @@ knitr::include_graphics(params[["w"]])
 
 Checklist:
 ```{r}
-params$x
+cat(params$x)
 ```
 
 Number of hydrophytes reported:
 ```{r}
-params$av
+cat(params$av)
 ```
 
 ```{r, out.width='25%', fig.align='center', fig.cap=params$ab}
@@ -216,14 +220,14 @@ knitr::include_graphics(params[["ag"]])
 
 General notes about hydrophytic vegetation:
 ```{r}
-params$bc
+cat(params$bc)
 ```
 
 ## Algae cover
 
 Cover of live or dead algal mats in streambed:
 ```{r}
-params$ao
+cat(params$ao)
 ```
 
 ```{r, out.width='25%', fig.align='center'}
@@ -232,24 +236,24 @@ knitr::include_graphics(params[["ap"]])
 
 General notes about algae:
 ```{r}
-params$bb
+cat(params$bb)
 ```
 
 ## Aquatic invertebrates
 
 Number of individuals observed:
 ```{r}
-params$ai
+cat(params$ai)
 ```
 
 Are mayflies, stoneflies, or caddisflies present?
 ```{r}
-params$aj
+cat(params$aj)
 ```
 
 Invertebrate taxa observed:
 ```{r}
-params$ak
+cat(params$ak)
 ```
 
 ```{r, out.width='25%', fig.align='center'}
@@ -262,14 +266,14 @@ knitr::include_graphics(params[["am"]])
 
 General notes about aquatic invertebrates:
 ```{r}
-params$an
+cat(params$an)
 ```
 
 ## Single indicators
 
 Fish observed:
 ```{r}
-params$aq
+cat(params$aq)
 ```
 
 ```{r, out.width='25%', fig.align='center'}
@@ -278,22 +282,22 @@ knitr::include_graphics(params[["ar"]])
 
 General notes about fish:
 ```{r}
-params$bd
+cat(params$bd)
 ```
 
 Aquatic amphibians observed:
 ```{r}
-params$as
+cat(params$as)
 ```
 
 Aquatic snakes observed:
 ```{r}
-params$at
+cat(params$at)
 ```
 
 ## Other indicators
 ```{r}
-params$bf
+cat(params$bf)
 ```
 
 ## Additional photo(s)
@@ -304,7 +308,7 @@ knitr::include_graphics(params[["ba"]])
 
 ## Additional notes about the assessment
 ```{r}
-params$bg
+cat(params$bg)
 ```
 
 ***
