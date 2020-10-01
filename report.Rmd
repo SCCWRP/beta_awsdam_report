@@ -108,7 +108,7 @@ params$j
 
 Location:
 ```{r}
-paste0(params$g,",", params$h) 
+paste0(params$g," N, ", params$h, " E")
 ```
 
 Datum:
@@ -302,7 +302,7 @@ params$bf
 knitr::include_graphics(params[["ba"]])
 ```
 
-## Other indicators
+## Additional notes about the assessment
 ```{r}
 params$bg
 ```

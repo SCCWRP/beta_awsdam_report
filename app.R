@@ -30,37 +30,38 @@ shinyApp(
       "This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."),
     
     textInput("project", label = h5("Project Name or Number"), value = "Enter text..."), # text input box
-    textInput("assessor", label = h5("Assessor(s)"), value = "Enter text..."), # text input box
     textInput("code", label = h5("Site Code or Identifier:"), value = "Enter text..."), # text input box
+    textInput("assessor", label = h5("Assessor(s)"), value = "Enter text..."), # text input box
     textInput("waterway", label = h5("Waterway Name"), value = "Enter text..."), # text input box
     textInput("date", label = h5("Visit Date"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
-    textInput("boundary", label = h5("Reach Boundaries"), value = "Enter text..."), # text input box
+    textInput("weather", label = h5("Weather"), value = "Enter text..."), # text input box
     textInput("lat", label = h5("Latitude at downstream end (d.ddddd N)"), value = "Enter text..."), # text input box
     textInput("lon", label = h5("Longitude at downstream end (d.ddddd E)"), value = "Enter text..."), # text input box
     textInput("datum", label = h5("Datum"), value = "Enter text..."), # text input box
-    textInput("weather", label = h5("Weather"), value = "Enter text..."), # text input box
+    textInput("use", label = h5("Surrounding Land Use within 100 m"), value = "Enter text..."), # text input box
+    textInput("boundary", label = h5("Reach Boundaries"), value = "Enter text..."), # text input box
+    textInput("channel", label = h5("Mean Channel Width (m)"), value = "Enter text..."), # text input box
+    textInput("actreach", label = h5("Reach Length (m)"), value = "Enter text..."), # text input box
     textInput("situation", label = h5("Site Disturbance/Difficulties"), value = "Enter text..."), # text input box
-    textInput("use", label = h5("Surrounding Land Use"), value = "Enter text..."), # text input box
     textInput("surfflow", label = h5("Percent of Reach with Surface Flows"), value = "Enter text..."), # text input box
     textInput("subflow", label = h5("Percent of Reach with Surface and Sub-Surface Flows"), value = "Enter text..."), # text input box
     textInput("pool", label = h5("Number of Isolated Pools"), value = "Enter text..."), # text input box
-    textInput("channel", label = h5("Mean Channel Width (m)"), value = "Enter text..."), # text input box
-    textInput("actreach", label = h5("Reach Length (m)"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
-    fileInput("blu", label = h5("Site Photo - Bottom Looking Up")), # file input box
-    fileInput("mld", label = h5("Site Photo - Middle Looking Down")), # file input box
-    fileInput("mlu", label = h5("Site Photo - Middle Looking Up")), # file input box
-    fileInput("tld", label = h5("Site Photo - Top Looking Down")), # file input box
+    fileInput("tld", label = h5("Site Photo - Top of Reach Looking Downstream")), # file input box
+    fileInput("mlu", label = h5("Site Photo - Middle of Reach Looking Upstream")), # file input box
+    fileInput("mld", label = h5("Site Photo - Middle of Reach Looking Downstream")), # file input box
+    fileInput("blu", label = h5("Site Photo - Bottom of Reach Looking Upstream")), # file input box
+    
     fileInput("sketch", label = h5("Site Sketch")), # file input box
     
     hr(), # adds divider
     
-    textInput("checklist", label = h5("Checklist Used"), value = "Enter text..."), # text input box
+    textInput("checklist", label = h5("Hydrophytic Vegetation Checklist Used"), value = "Enter text..."), # text input box
     # hydrophyte input for report
     textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
     # hydrophyte input for determination
@@ -77,28 +78,27 @@ shinyApp(
     
     hr(), # adds divider
     
+    # algae input for report
+    textInput("algae", label = h5("Cover of Live or Dead Algal Mats in Streambed"), value = "Enter text..."), # text input box
+    # algae input for determination
+    radioButtons(inputId = "radio_algae", label = "Algal mats (live or dead) - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0),
+    fileInput("alg1", label = h5("Algae Photo #1")), # file input box
+    textInput("algnotes", label = h5("General Notes about Algae"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
     # inverts input for report
     textInput("abundance", label = h5("Aquatic Invertebrates Abundance (number of individuals) - exact number observed"), value = "Enter text..."), # text input box
     # inverts input for determination
     radioButtons(inputId = "radio_bmi", label = "Aquatic Invertebrates Abundance (number of individuals) - select one of the below options", choices = list("None" = 0, "1 to 19" = 0.5, "20 or more" = 1), selected = 0), # radion buttons
     # EPT input for report
-    textInput("ept", label = h5("Mayflies, stoneflies, or caddisflies (EPT), live or dead - exact number observed"), value = "Enter text..."), # text input box
+    textInput("ept", label = h5("Are mayflies, stoneflies, or caddiesflies present?"), value = "Enter text..."), # text input box
     # EPT input for determination
     radioButtons(inputId = "radio_ept", label = "Mayflies, stoneflies, or caddisflies (EPT), live or dead - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0), # radio buttons
     textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
     fileInput("inv1", label = h5("Invertebrate Photo #1")), # file input box
     fileInput("inv2", label = h5("Invertebrate Photo #2")), # file input box
     textInput("invnotes", label = h5("General Notes about Aquatic Invertebrates"), value = "Enter text..."), # text input box
-    
-    hr(), # adds divider
-    
-    # algae input for report
-    textInput("algae", label = h5("Algal mats (live or dead) - exact number observed"), value = "Enter text..."), # text input box
-    # algae input for determination
-    # Algal measure input
-    radioButtons(inputId = "radio_algae", label = "Algal mats (live or dead) - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0),
-    fileInput("alg1", label = h5("Algae Photo #1")), # file input box
-    textInput("algnotes", label = h5("General Notes about Algae"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
