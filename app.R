@@ -23,7 +23,7 @@ shinyApp(
   ui = fluidPage(
     
     # App title
-    titlePanel("Field Form for Arid West Streamflow Duration Assessment Method"),
+    titlePanel("Interim Streamflow Duration Assessment Method for the Arid West"),
     
     # Title panel subtext
     tags$div(

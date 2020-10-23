@@ -1,6 +1,7 @@
 ---
-title: "Field Form for Arid West Streamflow Duration Assessment Method"
-author: "developed by the Southern California Coastal Water Research Project"
+title: "Interim Streamflow Duration Assessment Method for the Arid West"
+subtitle: "Classification Report"
+author: "developed by the Southern California Coastal Water Research Project for the Environmental Protection Agency"
 date: "Report generated on: `r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 params:
