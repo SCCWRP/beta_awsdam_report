@@ -185,6 +185,8 @@ shinyApp(
           xdf$pALI>mincut~"At Least Intermittent",
           T~"Need more information")
     })
+    #RDM: Add single indicator over-write of output
+    #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI"
     
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
@@ -196,7 +198,8 @@ shinyApp(
         file.copy("report.Rmd", tempReport, overwrite = TRUE)
         
         # Set up parameters to pass to Rmd document
-        params <- list(a = input$project,
+        params <- list(
+          a = input$project,
           b = input$assessor,
           c = input$code,
           d = input$waterway,
