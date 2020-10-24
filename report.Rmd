@@ -193,11 +193,6 @@ knitr::include_graphics(params[["w"]])
 
 ## Hydrophytic Vegetation
 
-Checklist:
-```{r}
-cat(params$x)
-```
-
 Number of hydrophytes reported:
 ```{r}
 cat(params$av)

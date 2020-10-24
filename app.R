@@ -61,9 +61,9 @@ shinyApp(
     
     hr(), # adds divider
     
-    textInput("checklist", label = h5("Hydrophytic Vegetation Checklist Used"), value = "Enter text..."), # text input box
+    #textInput("checklist", label = h5("Hydrophytic Vegetation Checklist Used"), value = "Enter text..."), # text input box
     # hydrophyte input for report
-    textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
+    #textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
     # hydrophyte input for determination
     radioButtons(inputId = "radio_hydro", label = "Hydrophytes (number of species) - select one of the below options", choices = list("None" = 0, "1 or 2 species" = 0.5, "3 or more species" = 1), selected = 0), # radio buttons
     fileInput("hyd1", label = h5("Hydrophyte Photo #1")), # file input box
@@ -221,7 +221,7 @@ shinyApp(
           u = fig3(),
           v = fig4(),
           w = fig5(),
-          x = input$checklist,
+          #x = input$checklist,
           aa = fig6(),
           ab = input$hyd1_cap,
           ac = fig7(),
@@ -242,7 +242,7 @@ shinyApp(
           ar = fig13(),
           as = input$amph,
           at = input$snake,
-          av = input$hydro,
+          av = as.numeric(input$radio_hydro),
           ba = fig14(),
           bb = input$algnotes,
           bc = input$hydnotes,
