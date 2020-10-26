@@ -56,6 +56,8 @@ params:
   be: NA
   bf: NA
   bg: NA
+  bh: NA
+  bi: NA
   rf: NA
   
 ---
@@ -191,9 +193,11 @@ knitr::include_graphics(params[["s"]])
 knitr::include_graphics(params[["w"]])
 ```
 
+***
+
 ## Hydrophytic Vegetation
 
-Number of hydrophytes reported:
+Hydrophytic species found in or near the channel:
 ```{r}
 cat(params$av)
 ```
@@ -214,10 +218,12 @@ knitr::include_graphics(params[["ae"]])
 knitr::include_graphics(params[["ag"]])
 ```
 
-General notes about hydrophytic vegetation:
+Notes on hydrophytic vegetation:
 ```{r}
 cat(params$bc)
 ```
+
+***
 
 ## Algae cover
 
@@ -291,7 +297,7 @@ Aquatic snakes observed:
 cat(params$at)
 ```
 
-## Other indicators
+## Supplemental Information
 ```{r}
 cat(params$bf)
 ```
@@ -300,6 +306,10 @@ cat(params$bf)
 
 ```{r, out.width='25%', fig.align='center', fig.cap = params$be}
 knitr::include_graphics(params[["ba"]])
+```
+
+```{r, out.width='25%', fig.align='center', fig.cap = params$bi}
+knitr::include_graphics(params[["bh"]])
 ```
 
 ## Additional notes about the assessment

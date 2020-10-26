@@ -61,11 +61,15 @@ shinyApp(
     
     hr(), # adds divider
     
+    # Title panel subtext
+    tags$div(
+      "Field form instructions: Record up to 5 hydrophytic plant species (FACW or OBL in the Arid West regional wetland plant list) within the assessment area: within the channel or up to one half-channel width. Explain in notes if species has an odd distribution (e.g., covers less than 2% of assessment area, long-lived species solely represented by seedlings, or long-lived species solely represented by specimens in decline), or if there is uncertainty about the identification. Enter photo ID, or check if photo is taken."),
+    
     #textInput("checklist", label = h5("Hydrophytic Vegetation Checklist Used"), value = "Enter text..."), # text input box
     # hydrophyte input for report
     #textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
     # hydrophyte input for determination
-    radioButtons(inputId = "radio_hydro", label = "Hydrophytes (number of species) - select one of the below options", choices = list("None" = 0, "1 or 2 species" = 0.5, "3 or more species" = 1), selected = 0), # radio buttons
+    radioButtons(inputId = "radio_hydro", label = "How many hydrophytic species are found in or near the channel? - select one of the below options", choices = list("None" = 0, "1 or 2 species" = 0.5, "3 or more species" = 1), selected = 0), # radio buttons
     fileInput("hyd1", label = HTML("Hydrophyte Photo #1<br />Upload photo file here.")), # file input box
     textInput("hyd1_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
     fileInput("hyd2", label = HTML("Hydrophyte Photo #2<br />Upload photo file here.")), # file input box
@@ -74,7 +78,7 @@ shinyApp(
     textInput("hyd3_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
     fileInput("hyd4", label = HTML("Hydrophyte Photo #4<br />Upload photo file here.")), # file input box
     textInput("hyd4_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
-    textInput("algnotes", label = h5("General Notes about Hydrophytic Vegetation"), value = "Enter text..."), # text input box
+    textInput("hydnotes", label = h5("Notes on hydrophytic vegetation:"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
@@ -110,7 +114,7 @@ shinyApp(
     
     hr(), # adds divider
     
-    textInput("other_ind", label = h5("Other Indicators"), value = "Enter text..."), # text input box
+    textInput("other_ind", label = h5("Supplemental Information"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
@@ -118,6 +122,12 @@ shinyApp(
     textInput("add_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
+    
+    fileInput("add2", label = HTML("Additional Photo #2<br />Upload photo file here.")), # file input box
+    textInput("add_cap2", label = h5("Figure Caption"), value = "Enter text..."), # text input box
+    
+    hr(), # adds divider
+    
     
     textInput("add_notes", label = h5("Additional Notes about the Assessment"), value = "Enter text..."), # text input box
     
@@ -150,6 +160,7 @@ shinyApp(
     fig13 <- reactive({gsub("\\\\", "/", input$fish1$datapath)})
     # Additional photos
     fig14 <- reactive({gsub("\\\\", "/", input$add1$datapath)})
+    fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
     
     # Code for stream classification determination (using random forest model results)
     predict_flowduration <- reactive({
@@ -242,7 +253,8 @@ shinyApp(
           ar = fig13(),
           as = input$amph,
           at = input$snake,
-          av = as.numeric(input$radio_hydro),
+          av = ifelse(input$radio_hydro == 0, "0 species", 
+            ifelse(input$radio_hydro == 0.5, "1 - 2 species", "3+ species")),
           ba = fig14(),
           bb = input$algnotes,
           bc = input$hydnotes,
@@ -250,6 +262,8 @@ shinyApp(
           be = input$add_cap,
           bf = input$other_ind,
           bg = input$add_notes,
+          bh = fig15(),
+          bi = input$add_cap2,
           rf = predict_flowduration())
         
         # Knit the document, passing in the `params` list, and eval it in a
