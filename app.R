@@ -209,6 +209,8 @@ shinyApp(
       EPT <- as.numeric(input$radio_ept)
       BMI <- as.numeric(input$radio_bmi)
       livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # need to account for two "yes" options
+      SIfish <- as.numeric(input$fish)
+      SIalg <- as.numeric(input$alg_si)
       
       #assemble test data that will be input by the user
       test.df<-data.frame(hydrophytes_3pa=hydrophytes,
@@ -229,6 +231,9 @@ shinyApp(
       # final determination
       if(EPT==1 & BMI==0)
         print("WARNING! Illogical invertebrate inputs.")
+      else
+        if(SIfish==1 & SIalg==1)
+          print("At Least Intermittent")
       else
         case_when(xdf$P>mincut~"Perennial",
           xdf$I>mincut~"Intermittent",
