@@ -52,12 +52,12 @@ shinyApp(
     
     hr(), # adds divider
     
-    fileInput("tld", label = h5("Site Photo - Top of Reach Looking Downstream")), # file input box
-    fileInput("mlu", label = h5("Site Photo - Middle of Reach Looking Upstream")), # file input box
-    fileInput("mld", label = h5("Site Photo - Middle of Reach Looking Downstream")), # file input box
-    fileInput("blu", label = h5("Site Photo - Bottom of Reach Looking Upstream")), # file input box
+    fileInput("tld", label = HTML("Site Photo - Top of Reach Looking Downstream<br />Upload photo file here.")), # file input box
+    fileInput("mlu", label = HTML("Site Photo - Middle of Reach Looking Upstream<br />Upload photo file here.")), # file input box
+    fileInput("mld", label = HTML("Site Photo - Middle of Reach Looking Downstream<br />Upload photo file here.")), # file input box
+    fileInput("blu", label = HTML("Site Photo - Bottom of Reach Looking Upstream<br />Upload photo file here.")), # file input box
     
-    fileInput("sketch", label = h5("Site Sketch")), # file input box
+    fileInput("sketch", label = HTML("Site Sketch<br />Upload photo file here.")), # file input box
     
     hr(), # adds divider
     
@@ -66,13 +66,13 @@ shinyApp(
     #textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
     # hydrophyte input for determination
     radioButtons(inputId = "radio_hydro", label = "Hydrophytes (number of species) - select one of the below options", choices = list("None" = 0, "1 or 2 species" = 0.5, "3 or more species" = 1), selected = 0), # radio buttons
-    fileInput("hyd1", label = h5("Hydrophyte Photo #1")), # file input box
+    fileInput("hyd1", label = HTML("Hydrophyte Photo #1<br />Upload photo file here.")), # file input box
     textInput("hyd1_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
-    fileInput("hyd2", label = h5("Hydrophyte Photo #2")), # file input box
+    fileInput("hyd2", label = HTML("Hydrophyte Photo #2<br />Upload photo file here.")), # file input box
     textInput("hyd2_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
-    fileInput("hyd3", label = h5("Hydrophyte Photo #3")), # file input box
+    fileInput("hyd3", label = HTML("Hydrophyte Photo #3<br />Upload photo file here.")), # file input box
     textInput("hyd3_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
-    fileInput("hyd4", label = h5("Hydrophyte Photo #4")), # file input box
+    fileInput("hyd4", label = HTML("Hydrophyte Photo #4<br />Upload photo file here.")), # file input box
     textInput("hyd4_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
     textInput("algnotes", label = h5("General Notes about Hydrophytic Vegetation"), value = "Enter text..."), # text input box
     
@@ -82,7 +82,7 @@ shinyApp(
     textInput("algae", label = h5("Cover of Live or Dead Algal Mats in Streambed"), value = "Enter text..."), # text input box
     # algae input for determination
     radioButtons(inputId = "radio_algae", label = "Algal mats (live or dead) - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0),
-    fileInput("alg1", label = h5("Algae Photo #1")), # file input box
+    fileInput("alg1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
     textInput("algnotes", label = h5("General Notes about Algae"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
@@ -96,14 +96,14 @@ shinyApp(
     # EPT input for determination
     radioButtons(inputId = "radio_ept", label = "Mayflies, stoneflies, or caddisflies (EPT), live or dead - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0), # radio buttons
     textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
-    fileInput("inv1", label = h5("Invertebrate Photo #1")), # file input box
-    fileInput("inv2", label = h5("Invertebrate Photo #2")), # file input box
+    fileInput("inv1", label = HTML("Invertebrate Photo #1<br />Upload photo file here.")), # file input box
+    fileInput("inv2", label = HTML("Invertebrate Photo #2<br />Upload photo file here.")), # file input box
     textInput("invnotes", label = h5("General Notes about Aquatic Invertebrates"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
     
     textInput("fish", label = h5("Fish Observed"), value = "Enter text..."), # text input box
-    fileInput("fish1", label = h5("Fish Photo #1")), # file input box
+    fileInput("fish1", label = HTML("Fish Photo #1<br />Upload photo file here.")), # file input box
     textInput("fishnotes", label = h5("General Notes about Fish"), value = "Enter text..."), # text input box
     textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
     textInput("snake", label = h5("Aquatic Snakes Observed"), value = "Enter text..."), # text input box
@@ -114,7 +114,7 @@ shinyApp(
     
     hr(), # adds divider
     
-    fileInput("add1", label = h5("Additional Photo #1")), # file input box
+    fileInput("add1", label = HTML("Additional Photo #1<br />Upload photo file here.")), # file input box
     textInput("add_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
     
     hr(), # adds divider
