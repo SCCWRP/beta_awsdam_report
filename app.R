@@ -32,32 +32,44 @@ shinyApp(
       "This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."),
 
 # General Info ------------------------------------------------------------
-
-    textInput("project", label = h5("Project Name or Number"), value = "Enter text..."), # text input box
-    textInput("code", label = h5("Site Code or Identifier:"), value = "Enter text..."), # text input box
-    textInput("assessor", label = h5("Assessor(s)"), value = "Enter text..."), # text input box
-    textInput("waterway", label = h5("Waterway Name"), value = "Enter text..."), # text input box
-    textInput("date", label = h5("Visit Date"), value = "Enter text..."), # text input box
-    
     hr(), # adds divider
+    h3("General Site Information"), # Adds section header
+    br(), # line break
     
-    textInput("weather", label = h5("Weather"), value = "Enter text..."), # text input box
-    textInput("lat", label = h5("Latitude at downstream end (d.ddddd N)"), value = "Enter text..."), # text input box
-    textInput("lon", label = h5("Longitude at downstream end (d.ddddd E)"), value = "Enter text..."), # text input box
-    textInput("datum", label = h5("Datum"), value = "Enter text..."), # text input box
-    textInput("use", label = h5("Surrounding Land Use within 100 m"), value = "Enter text..."), # text input box
-    textInput("boundary", label = h5("Reach Boundaries"), value = "Enter text..."), # text input box
-    textInput("channel", label = h5("Mean Channel Width (m)"), value = "Enter text..."), # text input box
-    textInput("actreach", label = h5("Reach Length (m)"), value = "Enter text..."), # text input box
+    textInput("project", label = h5("Project name or number:"), value = "Enter text..."), # text input box
+    textInput("code", label = h5("Site code or identifier:"), value = "Enter text..."), # text input box
+    textInput("assessor", label = h5("Assessor(s):"), value = "Enter text..."), # text input box
+    textInput("waterway", label = h5("Waterway name:"), value = "Enter text..."), # text input box
+    textInput("date", label = h5("Visit date:"), value = "Enter text..."), # text input box
+    
+    radioButtons(inputId = "radio_weather", label = "Current weather conditions (check one).", choices = list("Storm/heavy rain" = 0, "Steady rain" = 1, "Intermittent rain" = 2, "Snowing" = 3, "Cloudy" = 4, "Clear/Sunny" = 5), selected = 5), # radion buttons
+    textInput("weather", label = h5("Notes on current or recent weather conditions:"), value = "Enter text..."), # text input box
+    
+    h4("Coordinates at downstream end:"), # Adds section header
+    textInput("lat", label = h5("Lat (N, decimal degrees):"), value = "Enter text..."), # text input box
+    textInput("lon", label = h5("Lon (W, decimal degrees):"), value = "Enter text..."), # text input box
+    textInput("datum", label = h5("Datum:"), value = "Enter text..."), # text input box
+    
+    textInput("use", label = h5("Surrounding land-use within 100 m (check one)."), value = "Enter text..."), # text input box
+    textInput("boundary", label = h5("Describe reach boundaries:"), value = "Enter text..."), # text input box
+    
+    textInput("channel", label = h5("Mean channel width (m)"), value = "Enter text..."), # text input box
+    textInput("actreach", label = h5("Reach length (m)"), value = "Enter text..."), # text input box
+    
+    radioButtons(inputId = "radio_situation", label = "Disturbed or difficult conditions (check all that apply).", choices = list("Recent flood or debris flow" = 0, "Stream modifications (e.g., channelization)" = 1, "Diversions" = 2, "Discharges" = 3, "Drought" = 4, "Vegetation removal/limitations" = 5, "Other (explain in notes)" = 6, "None" = 7), selected = 7), # radion buttons
     textInput("situation", label = h5("Site Disturbance/Difficulties"), value = "Enter text..."), # text input box
+    
+    h4("Observed hydrology:"), # Adds section header
     textInput("surfflow", label = h5("Percent of Reach with Surface Flows"), value = "Enter text..."), # text input box
     textInput("subflow", label = h5("Percent of Reach with Surface and Sub-Surface Flows"), value = "Enter text..."), # text input box
     textInput("pool", label = h5("Number of Isolated Pools"), value = "Enter text..."), # text input box
-    
-    hr(), # adds divider
+    textInput("hydro_comments", label = h5("Comments on observed hydrology:"), value = "Enter text..."), # text input box
     
 # Site Photos -------------------------------------------------------------
-
+    
+    hr(), # adds divider
+    h3("Site Photos:"), # Adds section header
+    br(), # line break
     fileInput("tld", label = HTML("Site Photo - Top of Reach Looking Downstream<br />Upload photo file here.")), # file input box
     fileInput("mlu", label = HTML("Site Photo - Middle of Reach Looking Upstream<br />Upload photo file here.")), # file input box
     fileInput("mld", label = HTML("Site Photo - Middle of Reach Looking Downstream<br />Upload photo file here.")), # file input box
@@ -100,8 +112,7 @@ shinyApp(
     hr(), # adds divider
     
     h3("Aquatic Invertebrates"), # Adds section header
-    tags$div(
-      "Field form instructions: Do no count mosquitos."), # subtext
+    tags$div("Field form instructions: Do not count mosquitos."), # subtext
     br(), # line break
     
     # inverts input for report
@@ -138,8 +149,7 @@ shinyApp(
     hr(), # adds divider
     
     h3("Single Indicators"), # Adds section header
-    tags$div(
-      "Field form instructions: Single indicators result in classification of 'At least intermittent', in the absence of other information."), # subtext
+    tags$div("Field form instructions: Single indicators result in classification of 'At least intermittent', in the absence of other information."), # subtext
     br(), # line break
     
     radioButtons("fish", label = "Fish (other than mosquitofish)", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
@@ -155,22 +165,17 @@ shinyApp(
 # Supplemental Info -------------------------------------------------------
     
     hr(), # adds divider
-    
-    textInput("other_ind", label = h5("Supplemental Information"), value = "Enter text..."), # text input box
-    
-    hr(), # adds divider
+    h3("Supplemental Information"), # Adds section header
+    tags$div("Field form instructions: e.g., aquatic life stages of amphibians, snakes, or turtles; iron-oxidizing bacteria and fungi; hydric soils, etc."), # subtext
+    br(), # line break
+    textInput("other_ind", label = h5("Supplemental information"), value = "Enter text..."), # text input box
     
     fileInput("add1", label = HTML("Additional Photo #1<br />Upload photo file here.")), # file input box
     textInput("add_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
-    
-    hr(), # adds divider
-    
+    br(), # line break
     fileInput("add2", label = HTML("Additional Photo #2<br />Upload photo file here.")), # file input box
     textInput("add_cap2", label = h5("Figure Caption"), value = "Enter text..."), # text input box
-    
-    hr(), # adds divider
-    
-    
+    br(), # line break
     textInput("add_notes", label = h5("Additional Notes about the Assessment"), value = "Enter text..."), # text input box
     
     downloadButton("report", "Generate report.")
@@ -318,6 +323,19 @@ shinyApp(
           bj = fig16(),
           bk = ifelse(input$alg_si == 0, "No", "Yes"),
           #bl = fig17,
+          bm = ifelse(input$radio_weather == 0, "Storm/heavy rain",
+            ifelse(input$radio_weather == 1, "Steady rain",
+              ifelse(input$radio_weather == 2, "Intermittent rain",
+                ifelse(input$radio_weather == 3, "Snowing",
+                  ifelse(input$radio_weather == 4, "Cloudy", "Clear/Sunny"))))),
+          bn = ifelse(input$radio_situation == 0, "Recent flood or debris flow",
+            ifelse(input$radio_situation == 1, "Stream modifications (e.g., channelization)",
+              ifelse(input$radio_situation == 2, "Diversions",
+                ifelse(input$radio_situation == 3, "Discharges",
+                  ifelse(input$radio_situation == 4, "Drought",
+                    ifelse(input$radio_situation == 5, "Vegetation removal/limitations",
+                      ifelse(input$radio_situation == 6, "Other (explain in notes)", "None"))))))),
+          bo = input$hydro_comments,
           rf = predict_flowduration())
         
         # Knit the document, passing in the `params` list, and eval it in a
