@@ -28,7 +28,9 @@ shinyApp(
     # Title panel subtext
     tags$div(
       "This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."),
-    
+
+# General Info ------------------------------------------------------------
+
     textInput("project", label = h5("Project Name or Number"), value = "Enter text..."), # text input box
     textInput("code", label = h5("Site Code or Identifier:"), value = "Enter text..."), # text input box
     textInput("assessor", label = h5("Assessor(s)"), value = "Enter text..."), # text input box
@@ -52,7 +54,6 @@ shinyApp(
     
     hr(), # adds divider
     
-
 # Site Photos -------------------------------------------------------------
 
     fileInput("tld", label = HTML("Site Photo - Top of Reach Looking Downstream<br />Upload photo file here.")), # file input box
@@ -60,8 +61,8 @@ shinyApp(
     fileInput("mld", label = HTML("Site Photo - Middle of Reach Looking Downstream<br />Upload photo file here.")), # file input box
     fileInput("blu", label = HTML("Site Photo - Bottom of Reach Looking Upstream<br />Upload photo file here.")), # file input box
     
+    h3("Site Sketch:"), # Adds section header
     fileInput("sketch", label = HTML("Site Sketch<br />Upload photo file here.")), # file input box
-    
 
 # Hydrophytes -------------------------------------------------------------
 
@@ -118,12 +119,19 @@ shinyApp(
 
     hr(), # adds divider
     
+    h3("Algae Cover"), # Adds section header
+    tags$div(
+      "Field form instructions: Estimate cover of live or dead algae in the streambed (local growth only)."), # subtext
+    br(), # line break
+    
     # algae input for report
-    textInput("algae", label = h5("Cover of Live or Dead Algal Mats in Streambed"), value = "Enter text..."), # text input box
+    # textInput("algae", label = h5("Cover of Live or Dead Algal Mats in Streambed"), value = "Enter text..."), # text input box
     # algae input for determination
-    radioButtons(inputId = "radio_algae", label = "Algal mats (live or dead) - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0),
+    radioButtons(inputId = "radio_algae", label = "Are algae found on the streambed? - select one of the below options", choices = list("Not detected" = 0, "Yes, <10% cover" = 1, "Yes, >10% cover" = 2), selected = 0),
     fileInput("alg1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
-    textInput("algnotes", label = h5("General Notes about Algae"), value = "Enter text..."), # text input box
+    textInput("algnotes", label = h5("Notes on algae cover:"), value = "Enter text..."), # text input box
+
+# Single Indicators -------------------------------------------------------
 
     hr(), # adds divider
     
@@ -155,7 +163,6 @@ shinyApp(
     downloadButton("report", "Generate report.")
   ),
   
-
 # Server ------------------------------------------------------------------
 
   server = function(input, output) {
@@ -189,7 +196,7 @@ shinyApp(
       hydrophytes <- as.numeric(input$radio_hydro)
       EPT <- as.numeric(input$radio_ept)
       BMI <- as.numeric(input$radio_bmi)
-      livedeadalg <- as.numeric(input$radio_algae)
+      livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # need to account for two "yes" options
       
       #assemble test data that will be input by the user
       test.df<-data.frame(hydrophytes_3pa=hydrophytes,
@@ -269,7 +276,8 @@ shinyApp(
           al = fig10(),
           am = fig11(),
           an = input$invnotes,
-          ao = input$algae,
+          ao = ifelse(input$radio_algae == 0, "Not detected",
+            ifelse(input$radio_algae == 1, "Yes, <10% cover", "Yes >10% cover")),
           ap = fig12(),
           aq = input$fish,
           ar = fig13(),

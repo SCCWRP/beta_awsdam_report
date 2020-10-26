@@ -165,7 +165,7 @@ Number of isolated pools:
 cat(params$o)
 ```
 
-## Site photos
+## Site Photos
 
 Top of reach looking downstream:
 ```{r, out.width='25%', fig.align='center'}
@@ -186,6 +186,8 @@ Bottom of reach looking upstream:
 ```{r, out.width='25%', fig.align='center'}
 knitr::include_graphics(params[["s"]])
 ```
+
+***
 
 ## Site Sketch
 
@@ -225,7 +227,7 @@ cat(params$bc)
 
 ***
 
-## Aquatic invertebrates
+## Aquatic Invertebrates
 
 Number of individuals observed:
 ```{r}
@@ -252,9 +254,9 @@ cat(params$an)
 
 ***
 
-## Algae cover
+## Algae Cover
 
-Cover of live or dead algal mats in streambed:
+Cover of live or dead algal in the streambed:
 ```{r}
 cat(params$ao)
 ```
@@ -263,16 +265,14 @@ cat(params$ao)
 knitr::include_graphics(params[["ap"]])
 ```
 
-General notes about algae:
+Notes on algae cover:
 ```{r}
 cat(params$bb)
 ```
 
 ***
 
-
-
-## Single indicators
+## Single Indicators
 
 Fish observed:
 ```{r}
