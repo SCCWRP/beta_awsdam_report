@@ -11,6 +11,8 @@ library(randomForest)
 library(shiny)
 library(shinythemes)
 library(ggforce)
+library(imager)
+library(here)
 
 # Load dataset for random forest model
 load("FinalRF.Rdata")
@@ -201,6 +203,8 @@ shinyApp(
     fig14 <- reactive({gsub("\\\\", "/", input$add1$datapath)})
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
     fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
+    # Final image
+    fig17 <- load.image("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.jpg")
     
     # Code for stream classification determination (using random forest model results)
     predict_flowduration <- reactive({
@@ -313,6 +317,7 @@ shinyApp(
           bi = input$add_cap2,
           bj = fig16(),
           bk = ifelse(input$alg_si == 0, "No", "Yes"),
+          #bl = fig17,
           rf = predict_flowduration())
         
         # Knit the document, passing in the `params` list, and eval it in a
