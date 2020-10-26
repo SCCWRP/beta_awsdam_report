@@ -225,6 +225,33 @@ cat(params$bc)
 
 ***
 
+## Aquatic invertebrates
+
+Number of individuals observed:
+```{r}
+cat(params$ai)
+```
+
+Are EPT present?
+```{r}
+cat(params$aj)
+```
+
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["al"]])
+```
+
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["am"]])
+```
+
+Notes on aquatic invertebrates
+```{r}
+cat(params$an)
+```
+
+***
+
 ## Algae cover
 
 Cover of live or dead algal mats in streambed:
@@ -241,35 +268,9 @@ General notes about algae:
 cat(params$bb)
 ```
 
-## Aquatic invertebrates
+***
 
-Number of individuals observed:
-```{r}
-cat(params$ai)
-```
 
-Are mayflies, stoneflies, or caddisflies present?
-```{r}
-cat(params$aj)
-```
-
-Invertebrate taxa observed:
-```{r}
-cat(params$ak)
-```
-
-```{r, out.width='25%', fig.align='center'}
-knitr::include_graphics(params[["al"]])
-```
-
-```{r, out.width='25%', fig.align='center'}
-knitr::include_graphics(params[["am"]])
-```
-
-General notes about aquatic invertebrates:
-```{r}
-cat(params$an)
-```
 
 ## Single indicators
 

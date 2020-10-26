@@ -52,6 +52,9 @@ shinyApp(
     
     hr(), # adds divider
     
+
+# Site Photos -------------------------------------------------------------
+
     fileInput("tld", label = HTML("Site Photo - Top of Reach Looking Downstream<br />Upload photo file here.")), # file input box
     fileInput("mlu", label = HTML("Site Photo - Middle of Reach Looking Upstream<br />Upload photo file here.")), # file input box
     fileInput("mld", label = HTML("Site Photo - Middle of Reach Looking Downstream<br />Upload photo file here.")), # file input box
@@ -59,27 +62,60 @@ shinyApp(
     
     fileInput("sketch", label = HTML("Site Sketch<br />Upload photo file here.")), # file input box
     
+
+# Hydrophytes -------------------------------------------------------------
+
     hr(), # adds divider
     
-    # Title panel subtext
+    h3("Hydrophytic Plants"), # Adds section header
     tags$div(
-      "Field form instructions: Record up to 5 hydrophytic plant species (FACW or OBL in the Arid West regional wetland plant list) within the assessment area: within the channel or up to one half-channel width. Explain in notes if species has an odd distribution (e.g., covers less than 2% of assessment area, long-lived species solely represented by seedlings, or long-lived species solely represented by specimens in decline), or if there is uncertainty about the identification. Enter photo ID, or check if photo is taken."),
+      "Field form instructions: Record up to 5 hydrophytic plant species (FACW or OBL in the Arid West regional wetland plant list) within the assessment area: within the channel or up to one half-channel width. Explain in notes if species has an odd distribution (e.g., covers less than 2% of assessment area, long-lived species solely represented by seedlings, or long-lived species solely represented by specimens in decline), or if there is uncertainty about the identification. Enter photo ID, or check if photo is taken."), # subtext
+    br(), # line break
     
     #textInput("checklist", label = h5("Hydrophytic Vegetation Checklist Used"), value = "Enter text..."), # text input box
     # hydrophyte input for report
     #textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
     # hydrophyte input for determination
     radioButtons(inputId = "radio_hydro", label = "How many hydrophytic species are found in or near the channel? - select one of the below options", choices = list("None" = 0, "1 or 2 species" = 0.5, "3 or more species" = 1), selected = 0), # radio buttons
+    br(), # line break
     fileInput("hyd1", label = HTML("Hydrophyte Photo #1<br />Upload photo file here.")), # file input box
     textInput("hyd1_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
+    br(), # line break
     fileInput("hyd2", label = HTML("Hydrophyte Photo #2<br />Upload photo file here.")), # file input box
     textInput("hyd2_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
+    br(), # line break
     fileInput("hyd3", label = HTML("Hydrophyte Photo #3<br />Upload photo file here.")), # file input box
     textInput("hyd3_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
+    br(), # line break
     fileInput("hyd4", label = HTML("Hydrophyte Photo #4<br />Upload photo file here.")), # file input box
     textInput("hyd4_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
+    br(), # line break
     textInput("hydnotes", label = h5("Notes on hydrophytic vegetation:"), value = "Enter text..."), # text input box
     
+# Invertebrates -----------------------------------------------------------
+
+    hr(), # adds divider
+    
+    h3("Aquatic Invertebrates"), # Adds section header
+    tags$div(
+      "Field form instructions: Do no count mosquitos."), # subtext
+    br(), # line break
+    
+    # inverts input for report
+    # textInput("abundance", label = h5("How many aquatic invertebrates are found? - exact number of individuals observed"), value = "Enter text..."), # text input box
+    # inverts input for determination
+    radioButtons(inputId = "radio_bmi", label = "How many aquatic invertebrates are found? (number of individuals observed) - select one of the below options", choices = list("None" = 0, "1 to 19" = 0.5, "20 or more" = 1), selected = 0), # radion buttons
+    # EPT input for report
+    # textInput("ept", label = h5("Are EPT (Ephemeroptera, Plecoptera, and Trichoptera) present?"), value = "Enter text..."), # text input box
+    # EPT input for determination
+    radioButtons(inputId = "radio_ept", label = "Are EPT (Ephemeroptera, Plecoptera, and Trichoptera) present? - select one of the below options", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio buttons
+    #textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
+    fileInput("inv1", label = HTML("Invertebrate Photo #1<br />Upload photo file here.")), # file input box
+    fileInput("inv2", label = HTML("Invertebrate Photo #2<br />Upload photo file here.")), # file input box
+    textInput("invnotes", label = h5("Notes on aquatic invertebrates:"), value = "Enter text..."), # text input box
+
+# Algae -------------------------------------------------------------------
+
     hr(), # adds divider
     
     # algae input for report
@@ -88,22 +124,7 @@ shinyApp(
     radioButtons(inputId = "radio_algae", label = "Algal mats (live or dead) - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0),
     fileInput("alg1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
     textInput("algnotes", label = h5("General Notes about Algae"), value = "Enter text..."), # text input box
-    
-    hr(), # adds divider
-    
-    # inverts input for report
-    textInput("abundance", label = h5("Aquatic Invertebrates Abundance (number of individuals) - exact number observed"), value = "Enter text..."), # text input box
-    # inverts input for determination
-    radioButtons(inputId = "radio_bmi", label = "Aquatic Invertebrates Abundance (number of individuals) - select one of the below options", choices = list("None" = 0, "1 to 19" = 0.5, "20 or more" = 1), selected = 0), # radion buttons
-    # EPT input for report
-    textInput("ept", label = h5("Are mayflies, stoneflies, or caddiesflies present?"), value = "Enter text..."), # text input box
-    # EPT input for determination
-    radioButtons(inputId = "radio_ept", label = "Mayflies, stoneflies, or caddisflies (EPT), live or dead - select one of the below options", choices = list("Absent" = 0, "Present" = 1), selected = 0), # radio buttons
-    textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
-    fileInput("inv1", label = HTML("Invertebrate Photo #1<br />Upload photo file here.")), # file input box
-    fileInput("inv2", label = HTML("Invertebrate Photo #2<br />Upload photo file here.")), # file input box
-    textInput("invnotes", label = h5("General Notes about Aquatic Invertebrates"), value = "Enter text..."), # text input box
-    
+
     hr(), # adds divider
     
     textInput("fish", label = h5("Fish Observed"), value = "Enter text..."), # text input box
@@ -241,9 +262,10 @@ shinyApp(
           af = input$hyd3_cap,
           ag = fig9(),
           ah = input$hyd4_cap,
-          ai = input$abundance,
-          aj = input$ept,
-          ak = input$invtaxa,
+          ai = ifelse(input$radio_bmi == 0, "None", 
+            ifelse(input$radio_bmi == 0.5, "1 to 19", "20+")),
+          aj = ifelse(input$radio_ept == 0, "No", "Yes"),
+          #ak = input$invtaxa,
           al = fig10(),
           am = fig11(),
           an = input$invnotes,
