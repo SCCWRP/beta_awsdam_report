@@ -135,11 +135,22 @@ shinyApp(
 
     hr(), # adds divider
     
-    textInput("fish", label = h5("Fish Observed"), value = "Enter text..."), # text input box
+    h3("Single Indicators"), # Adds section header
+    tags$div(
+      "Field form instructions: Single indicators result in classification of 'At least intermittent', in the absence of other information."), # subtext
+    br(), # line break
+    
+    radioButtons("fish", label = "Fish (other than mosquitofish)", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
     fileInput("fish1", label = HTML("Fish Photo #1<br />Upload photo file here.")), # file input box
-    textInput("fishnotes", label = h5("General Notes about Fish"), value = "Enter text..."), # text input box
-    textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
-    textInput("snake", label = h5("Aquatic Snakes Observed"), value = "Enter text..."), # text input box
+    
+    radioButtons("alg_si", label = "Algae cover > 10%", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
+    fileInput("alg_si1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
+    
+    #textInput("fishnotes", label = h5("General Notes about Fish"), value = "Enter text..."), # text input box
+    #textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
+    #textInput("snake", label = h5("Aquatic Snakes Observed"), value = "Enter text..."), # text input box
+    
+# Supplemental Info -------------------------------------------------------
     
     hr(), # adds divider
     
@@ -189,6 +200,7 @@ shinyApp(
     # Additional photos
     fig14 <- reactive({gsub("\\\\", "/", input$add1$datapath)})
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
+    fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
     
     # Code for stream classification determination (using random forest model results)
     predict_flowduration <- reactive({
@@ -279,7 +291,7 @@ shinyApp(
           ao = ifelse(input$radio_algae == 0, "Not detected",
             ifelse(input$radio_algae == 1, "Yes, <10% cover", "Yes >10% cover")),
           ap = fig12(),
-          aq = input$fish,
+          aq = ifelse(input$fish == 0, "No", "Yes"),
           ar = fig13(),
           as = input$amph,
           at = input$snake,
@@ -294,6 +306,8 @@ shinyApp(
           bg = input$add_notes,
           bh = fig15(),
           bi = input$add_cap2,
+          bj = fig16(),
+          bk = ifelse(input$alg_si == 0, "No", "Yes"),
           rf = predict_flowduration())
         
         # Knit the document, passing in the `params` list, and eval it in a

@@ -58,6 +58,8 @@ params:
   bg: NA
   bh: NA
   bi: NA
+  bj: NA
+  bk: NA
   rf: NA
   
 ---
@@ -274,7 +276,7 @@ cat(params$bb)
 
 ## Single Indicators
 
-Fish observed:
+Fish (other than mosquitofish):
 ```{r}
 cat(params$aq)
 ```
@@ -283,20 +285,16 @@ cat(params$aq)
 knitr::include_graphics(params[["ar"]])
 ```
 
-General notes about fish:
+Algae cover > 10%:
 ```{r}
-cat(params$bd)
+cat(params$bk)
 ```
 
-Aquatic amphibians observed:
-```{r}
-cat(params$as)
+```{r, out.width='25%', fig.align='center'}
+knitr::include_graphics(params[["bj"]])
 ```
 
-Aquatic snakes observed:
-```{r}
-cat(params$at)
-```
+***
 
 ## Supplemental Information
 ```{r}
@@ -313,7 +311,7 @@ knitr::include_graphics(params[["ba"]])
 knitr::include_graphics(params[["bh"]])
 ```
 
-## Additional notes about the assessment
+## Additional notes about the assessment:
 ```{r}
 cat(params$bg)
 ```
