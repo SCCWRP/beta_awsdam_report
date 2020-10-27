@@ -135,7 +135,6 @@ Location:
 cat(paste0(params$g," N, ", params$h, " W"))
 ```
 
-Location Map:
 ```{r}
 
 # Used to test map functionality
@@ -143,23 +142,23 @@ Location Map:
 #h <- -118.249169
 #d <- "Glendale Narrows"
 
-site_data <- data.frame(params$d, params$g, params$h) # create dataframe
-names(site_data) <- c("site", "lat", "lon") # rename columns
-site_sf <- st_as_sf(site_data, # create sf compatible dataframe
-  coords = c("lon", "lat"), # identify lon & lat
-  remove = F, # do not remove lat/lon columns
-  crs = 4326) # use WGS84 projection
-
-mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-site_map <- mapview::mapview(site_sf, legend = FALSE) # adds in map
-
-mapshot(site_map, file = paste0(getwd(), "/map.png"),
-  selfcontained = FALSE) # exports map as a .png to temporary working directory
+# site_data <- data.frame(params$d, params$g, params$h) # create dataframe
+# names(site_data) <- c("site", "lat", "lon") # rename columns
+# site_sf <- st_as_sf(site_data, # create sf compatible dataframe
+#   coords = c("lon", "lat"), # identify lon & lat
+#   remove = F, # do not remove lat/lon columns
+#   crs = 4326) # use WGS84 projection
+# 
+# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+# site_map <- mapview::mapview(site_sf, legend = FALSE) # adds in map
+# 
+# mapshot(site_map, file = paste0(getwd(), "/map.png"),
+#   selfcontained = FALSE) # exports map as a .png to temporary working directory
 
 ```
 
 ```{r, out.width='50%', fig.align='center'}
-knitr::include_graphics("map.png")
+# knitr::include_graphics("map.png")
 ```
 
 Datum:
