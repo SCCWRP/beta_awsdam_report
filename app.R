@@ -157,8 +157,8 @@ shinyApp(
     radioButtons("fish", label = "Fish (other than mosquitofish)", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
     fileInput("fish1", label = HTML("Fish Photo #1<br />Upload photo file here.")), # file input box
     
-    radioButtons("alg_si", label = "Algae cover > 10%", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
-    fileInput("alg_si1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
+    # radioButtons("alg_si", label = "Algae cover > 10%", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
+    # fileInput("alg_si1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
     
     #textInput("fishnotes", label = h5("General Notes about Fish"), value = "Enter text..."), # text input box
     #textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
@@ -209,19 +209,19 @@ shinyApp(
     # Additional photos
     fig14 <- reactive({gsub("\\\\", "/", input$add1$datapath)})
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
-    fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
-    # Final image
-    fig17 <- load.image("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.jpg")
+    #fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
     
     # Code for stream classification determination (using random forest model results)
     predict_flowduration <- reactive({
+      
       # Convert all measure inputs to numerical values for use in our function.
       hydrophytes <- as.numeric(input$radio_hydro)
       EPT <- as.numeric(input$radio_ept)
       BMI <- as.numeric(input$radio_bmi)
-      livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # need to account for two "yes" options
+      livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # model results only take the binary yes/no, 1/0
+      SIalg <- as.numeric(ifelse(input$radio_algae == 0, 0,
+        ifelse(input$radio_algae == 1, 1, 2))) # need to account for two "yes" options in single indicators
       SIfish <- as.numeric(input$fish)
-      SIalg <- as.numeric(input$alg_si)
       
       #assemble test data that will be input by the user
       test.df<-data.frame(hydrophytes_3pa=hydrophytes,
@@ -243,17 +243,16 @@ shinyApp(
       if(EPT==1 & BMI==0)
         print("WARNING! Illogical invertebrate inputs.")
       else
-        if(SIfish==1 & SIalg==1)
-          print("At Least Intermittent")
-      else
         case_when(xdf$P>mincut~"Perennial",
           xdf$I>mincut~"Intermittent",
+          xdf$E>mincut & SIfish==1 & SIalg==2 ~"At Least Intermittent",
           xdf$E>mincut~"Ephemeral",
           xdf$pALI>mincut~"At Least Intermittent",
+          SIfish==1 & SIalg==2 ~ "At Least Intermittent",
           T~"Need more information")
     })
-    #RDM: Add single indicator over-write of output
-    #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI"
+    
+    #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI".
     
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
@@ -322,21 +321,22 @@ shinyApp(
           bg = input$add_notes,
           bh = fig15(),
           bi = input$add_cap2,
-          bj = fig16(),
-          bk = ifelse(input$alg_si == 0, "No", "Yes"),
-          #bl = fig17,
-          bm = ifelse(input$radio_weather == 0, "Storm/heavy rain",
-            ifelse(input$radio_weather == 1, "Steady rain",
-              ifelse(input$radio_weather == 2, "Intermittent rain",
-                ifelse(input$radio_weather == 3, "Snowing",
-                  ifelse(input$radio_weather == 4, "Cloudy", "Clear/Sunny"))))),
-          bn = ifelse(input$radio_situation == 0, "Recent flood or debris flow",
-            ifelse(input$radio_situation == 1, "Stream modifications (e.g., channelization)",
-              ifelse(input$radio_situation == 2, "Diversions",
-                ifelse(input$radio_situation == 3, "Discharges",
-                  ifelse(input$radio_situation == 4, "Drought",
-                    ifelse(input$radio_situation == 5, "Vegetation removal/limitations",
-                      ifelse(input$radio_situation == 6, "Other (explain in notes)", "None"))))))),
+          #bj = fig16(),
+          #bk = ifelse(input$alg_si == 0, "No", "Yes"),
+          bm = case_when(input$radio_weather == 0~"Storm/heavy rain",
+            input$radio_weather == 1~"Steady rain",
+            input$radio_weather == 2~"Intermittent rain",
+            input$radio_weather == 3~"Snowing",
+            input$radio_weather == 4~"Cloudy",
+            input$radio_weather == 5~"Clear/Sunny"),
+          bn = case_when(input$radio_situation == 0~"Recent flood or debris flow",
+            input$radio_situation == 1~"Stream modifications (e.g., channelization)",
+            input$radio_situation == 2~"Diversions",
+            input$radio_situation == 3~"Discharges",
+            input$radio_situation == 4~"Drought",
+            input$radio_situation == 5~"Vegetation removal/limitations",
+            input$radio_situation == 6~"Other (explain in notes)",
+            input$radio_situation == 7~"None"),
           bo = input$hydro_comments,
           rf = predict_flowduration())
         
