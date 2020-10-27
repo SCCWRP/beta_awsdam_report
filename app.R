@@ -11,7 +11,7 @@ library(randomForest)
 library(shiny)
 library(shinythemes)
 library(ggforce)
-#library(imager)
+library(imager)
 library(here)
 
 # Load dataset for random forest model
