@@ -13,6 +13,8 @@ library(shinythemes)
 library(ggforce)
 library(imager)
 library(here)
+library(sf)
+library(mapview)
 
 # Load dataset for random forest model
 load("FinalRF.Rdata")
@@ -25,7 +27,7 @@ shinyApp(
   ui = fluidPage(
     
     # App title
-    titlePanel("Interim Streamflow Duration Assessment Method for the Arid West"),
+    titlePanel("Beta Streamflow Duration Assessment Method for the Arid West"),
     
     # Title panel subtext
     tags$div(

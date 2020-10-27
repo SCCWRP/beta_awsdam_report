@@ -1,5 +1,5 @@
 ---
-title: "Interim Streamflow Duration Assessment Method for the Arid West Classification Report"
+title: "Beta Streamflow Duration Assessment Method for the Arid West Classification Report"
 subtitle: "developed by the Southern California Coastal Water Research Project for the Environmental Protection Agency"
 date: "Report generated on: `r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
@@ -85,6 +85,11 @@ knitr::opts_chunk$set(comment = NA)
 cat(params[["rf"]])
 ```
 
+Final Classification:
+```{r, out.width='100%', fig.align='center'}
+knitr::include_graphics(here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.jpg"))
+```
+
 ***
 
 ## General Site Information
@@ -128,6 +133,33 @@ cat(params$j)
 Location:
 ```{r}
 cat(paste0(params$g," N, ", params$h, " W"))
+```
+
+Location Map:
+```{r}
+
+# Used to test map functionality
+#g <- 34.108355
+#h <- -118.249169
+#d <- "Glendale Narrows"
+
+site_data <- data.frame(params$d, params$g, params$h) # create dataframe
+names(site_data) <- c("site", "lat", "lon") # rename columns
+site_sf <- st_as_sf(site_data, # create sf compatible dataframe
+  coords = c("lon", "lat"), # identify lon & lat
+  remove = F, # do not remove lat/lon columns
+  crs = 4326) # use WGS84 projection
+
+mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+site_map <- mapview::mapview(site_sf, legend = FALSE) # adds in map
+
+mapshot(site_map, file = paste0(getwd(), "/map.png"),
+  selfcontained = FALSE) # exports map as a .png to temporary working directory
+
+```
+
+```{r, out.width='50%', fig.align='center'}
+knitr::include_graphics("map.png")
 ```
 
 Datum:
@@ -337,8 +369,3 @@ cat(params$bg)
 ```
 
 ***
-
-Final Classification:
-```{r, out.width='100%', fig.align='center'}
-knitr::include_graphics(here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.jpg"))
-```
