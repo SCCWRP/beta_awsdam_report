@@ -24,17 +24,29 @@ load("FinalRF.Rdata")
 # User Interface ----------------------------------------------------------
 
 shinyApp(
-  ui = fluidPage(
+  ui = fluidPage( theme = "classic",
     
     # App title
-    titlePanel("Beta Streamflow Duration Assessment Method for the Arid West"),
+    navbarPage("Beta Streamflow Duration Assessment Method for the Arid West",
+      position = c("fixed-top")),
     
-    # Title panel subtext
-    tags$div(
-      "This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."),
+    # Adding padding due to pinning title at top
+    tags$style(type="text/css", "body {padding-top: 70px;}"),
+    
+    br(), # line break
+      
+      # Output: set of 2 tabs
+      tabsetPanel(type = "tabs",
 
-# General Info ------------------------------------------------------------
-    hr(), # adds divider
+    tabPanel("Background Information",
+      br(),
+      p("This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions.")),
+      
+    tabPanel("Report Generation",
+      br(),
+      
+    # General Info ------------------------------------------------------------
+      
     h3("General Site Information"), # Adds section header
     br(), # line break
     
@@ -114,7 +126,7 @@ shinyApp(
     hr(), # adds divider
     
     h3("Aquatic Invertebrates"), # Adds section header
-    tags$div("Field form instructions: Do not count mosquitos."), # subtext
+    tags$div("Field form instructions: Do not count mosquito larvae."), # subtext
     br(), # line break
     
     # inverts input for report
@@ -181,7 +193,7 @@ shinyApp(
     textInput("add_notes", label = h5("Additional Notes about the Assessment"), value = "Enter text..."), # text input box
     
     downloadButton("report", "Generate report.")
-  ),
+  ))),
   
 # Server ------------------------------------------------------------------
 
