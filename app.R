@@ -61,7 +61,7 @@ shinyApp(
     textInput("waterway", label = h5("Waterway name:"), value = "Enter text..."), # text input box
     textInput("date", label = h5("Visit date:"), value = "Enter text..."), # text input box
     
-    radioButtons(inputId = "radio_weather", label = "Current weather conditions (check one).", choices = list("Storm/heavy rain" = 0, "Steady rain" = 1, "Intermittent rain" = 2, "Snowing" = 3, "Cloudy" = 4, "Clear/Sunny" = 5), selected = 5), # radion buttons
+    radioButtons(inputId = "radio_weather", label = "Current weather conditions (check one).", choices = list("Storm/heavy rain" = 0, "Steady rain" = 1, "Intermittent rain" = 2, "Snowing" = 3, "Cloudy" = 4, "Clear/Sunny" = 5), selected = 5), # radio buttons
     textInput("weather", label = h5("Notes on current or recent weather conditions:"), value = "Enter text..."), # text input box
     
     h4("Coordinates at downstream end:"), # Adds section header
@@ -69,7 +69,7 @@ shinyApp(
     textInput("lon", label = h5("Lon (W, decimal degrees):"), value = "Enter text..."), # text input box
     textInput("datum", label = h5("Datum:"), value = "Enter text..."), # text input box
     
-    textInput("use", label = h5("Surrounding land-use within 100 m (check one)."), value = "Enter text..."), # text input box
+    radioButtons("radio_use", label = h5("Surrounding land-use within 100 m (check one)."), choices = list("Urban/industrial/residential" = 0, "Agricultural" = 1, "Developed open-space" = 2, "Forested" = 3, "Other natural" = 4, "Other" = 5), selected = 5), # radio buttons
     textInput("boundary", label = h5("Describe reach boundaries:"), value = "Enter text..."), # text input box
     
     textInput("channel", label = h5("Mean channel width (m)"), value = "Enter text..."), # text input box
@@ -137,11 +137,11 @@ shinyApp(
     # inverts input for report
     # textInput("abundance", label = h5("How many aquatic invertebrates are found? - exact number of individuals observed"), value = "Enter text..."), # text input box
     # inverts input for determination
-    radioButtons(inputId = "radio_bmi", label = "How many aquatic invertebrates are found? (number of individuals observed) - select one of the below options", choices = list("None" = 0, "1 to 19" = 0.5, "20 or more" = 1), selected = 0), # radion buttons
+    radioButtons(inputId = "radio_bmi", label = "How many aquatic invertebrates are quantified in a 15-minute search? (number of individuals observed) - select one of the below options", choices = list("None" = 0, "1 to 19" = 0.5, "20 or more" = 1), selected = 0), # radion buttons
     # EPT input for report
     # textInput("ept", label = h5("Are EPT (Ephemeroptera, Plecoptera, and Trichoptera) present?"), value = "Enter text..."), # text input box
     # EPT input for determination
-    radioButtons(inputId = "radio_ept", label = "Are EPT (Ephemeroptera, Plecoptera, and Trichoptera) present? - select one of the below options", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio buttons
+    radioButtons(inputId = "radio_ept", label = "Is there evidence of aquatic stages of EPT (Ephemeroptera, Plecoptera, and Trichoptera)? - select one of the below options", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio buttons
     #textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
     fileInput("inv1", label = HTML("Invertebrate Photo #1<br />Upload photo file here.")), # file input box
     fileInput("inv2", label = HTML("Invertebrate Photo #2<br />Upload photo file here.")), # file input box
@@ -352,7 +352,11 @@ shinyApp(
           i = input$datum,
           j = input$weather,
           k = input$situation,
-          l = input$use,
+          l = ifelse(input$radio_use == 0, "Urban/industrial/residential",
+            ifelse(input$radio_use == 1, "Agricultural",
+              ifelse(input$radio_use == 2, "Developed open-space",
+                ifelse(input$radio_use == 3, "Forested",
+                  ifelse(input$radio_use == 4, "Other natural", "Other"))))),
           m = input$surfflow,
           n = input$subflow,
           o = input$pool,

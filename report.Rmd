@@ -91,7 +91,7 @@ cat(params[["rf"]])
 ```
 
 Final Classification:
-```{r, out.width='75%', fig.align='center'}
+```{r, out.width='75%', fig.align='center', fig.cap = "Indicator presence/absence denoted in green based on input to tool."}
 knitr::include_graphics(
   case_when(params$tbl == 1 ~ here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.png"),
     params$tbl == 2 ~ here::here("02_H0_AI0_EPT0_ALG0_SI1_ALI-1.png"),
