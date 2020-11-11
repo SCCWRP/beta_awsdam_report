@@ -27,11 +27,14 @@ shinyApp(
   ui = fluidPage( theme = "classic",
     
     # App title
-    navbarPage("Beta Streamflow Duration Assessment Method for the Arid West",
-      position = c("fixed-top")),
+     navbarPage("Beta Streamflow Duration Assessment Method for the Arid West",
+       position = c("fixed-top")),
     
     # Adding padding due to pinning title at top
     tags$style(type="text/css", "body {padding-top: 70px;}"),
+    
+    # Adding images
+    titlePanel(tags$img(src="Slide1.jpeg", height="80%", width="80%")),
     
     br(), # line break
       
@@ -39,11 +42,12 @@ shinyApp(
       tabsetPanel(type = "tabs",
         position = c("fixed-top"),
 
-    tabPanel("Background Information",
+    tabPanel(h4("Background Information"),
       br(),
-      p("This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions.")),
+      column(width = 6,
+        p("This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."))),
       
-    tabPanel("Report Generation",
+    tabPanel(h4("Report Generation"),
       br(),
       
     # General Info ------------------------------------------------------------
@@ -194,7 +198,15 @@ shinyApp(
     textInput("add_notes", label = h5("Additional Notes about the Assessment"), value = "Enter text..."), # text input box
     
     downloadButton("report", "Generate report.")
-  ))),
+  ),
+        
+        # 3rd tab
+        
+        tabPanel(h4("Additional Resources"),
+          br(),
+          column(width = 6,
+            p("For additional information, please refer to the field manual and protocol developed for the Arid West Streamflow Duration Assessment Method. Field forms and additional materials can be found at INSERT HYPERLINK HERE.")))
+        )),
   
 # Server ------------------------------------------------------------------
 
