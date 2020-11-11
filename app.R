@@ -37,6 +37,7 @@ shinyApp(
       
       # Output: set of 2 tabs
       tabsetPanel(type = "tabs",
+        position = c("fixed-top"),
 
     tabPanel("Background Information",
       br(),
