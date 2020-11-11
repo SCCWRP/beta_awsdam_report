@@ -93,7 +93,37 @@ cat(params[["rf"]])
 Final Classification:
 ```{r, out.width='75%', fig.align='center'}
 knitr::include_graphics(
-  case_when(params$tbl == 1 ~ here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.png")))
+  case_when(params$tbl == 1 ~ here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.png"),
+    params$tbl == 2 ~ here::here("02_H0_AI0_EPT0_ALG0_SI1_ALI-1.png"),
+    params$tbl == 3 ~ here::here("03_H0_AI0_EPT0_ALG1_SI0_NMI-1.png"),
+    params$tbl == 4 ~ here::here("04_H0_AI0_EPT0_ALG1_SI1_ALI-1.png"),
+    params$tbl == 5 ~ here::here("05_H0_AI1_EPT0_ALG0_SI0_NMI-1.png"),
+    params$tbl == 6 ~ here::here("06_H0_AI1_EPT0_ALG0_SI1_ALI-1.png"),
+    params$tbl == 7 ~ here::here("07_H0_AI1_EPT0_ALG1_SI0_NMI-1.png"),
+    params$tbl == 8 ~ here::here("08_H0_AI1_EPT0_ALG1_SI1_ALI-1.png"),
+    params$tbl == 9 ~ here::here("09_H0_AI1_EPT1_ALGX_SIX_ALI-1.png"),
+    params$tbl == 10 ~ here::here("10_H0_AI2_EPT0_ALG0_SI0_NMI-1.png"),
+    params$tbl == 11 ~ here::here("11_H0_AI2_EPT0_ALG0_SI1_ALI-1.png"),
+    params$tbl == 12 ~ here::here("12_H0_AI2_EPT0_ALG1_SI0_NMI-1.png"),
+    params$tbl == 13 ~ here::here("13_H0_AI2_EPT0_ALG1_SI1_ALI-1.png"),
+    params$tbl == 14 ~ here::here("14_H0_AI2_EPT1_ALGX_SIX_ALI-1.png"),
+    params$tbl == 15 ~ here::here("15_H1_AI0_EPT0_ALG0_SI0_NMI-1.png"),
+    params$tbl == 16 ~ here::here("16_H1_AI0_EPT0_ALG0_SI1_ALI-1.png"),
+    params$tbl == 17 ~ here::here("17_H1_AI0_EPT0_ALG1_SIX_ALI-1.png"),
+    params$tbl == 18 ~ here::here("18_H1_AI1_EPT0_ALG0_SIX_INT-1.png"),
+    params$tbl == 19 ~ here::here("19_H1_AI1_EPT0_ALG1_SIX_ALI-1.png"),
+    params$tbl == 20 ~ here::here("20_H1_AI1_EPT1_ALGX_SIX_ALI-1.png"),
+    params$tbl == 21 ~ here::here("21_H1_AI2_EPT0_ALG0_SIX_INT-1.png"),
+    params$tbl == 22 ~ here::here("22_H1_AI2_EPT0_ALG1_SIX_ATL-1.png"),
+    params$tbl == 23 ~ here::here("23_H1_AI2_EPT1_ALG0_SIX_ATL-1.png"),
+    params$tbl == 24 ~ here::here("24_H1_AI2_EPT1_ALG1_SIX_INT-1.png"),
+    params$tbl == 25 ~ here::here("25_H2_AI0_EPT0_ALG0_SI0_NMI-1.png"),
+    params$tbl == 26 ~ here::here("26_H2_AI0_EPT0_ALG0_SI1_ALI-1.png"),
+    params$tbl == 27 ~ here::here("27_H2_AI0_EPT0_ALG1_SIX_ALI-1.png"),
+    params$tbl == 28 ~ here::here("28_H2_AI1_EPT0_ALGX_SIX_ALI-1.png"),
+    params$tbl == 29 ~ here::here("29_H2_AI1_EPT1_ALGX_SIX_PER-1.png"),
+    params$tbl == 30 ~ here::here("30_H2_AI2_EPT0_ALGX_SIX_ALI-1.png"),
+    params$tbl == 31 ~ here::here("31_H2_AI2_EPT1_ALGX_SIX_PER-1.png")))
 ```
 
 ***

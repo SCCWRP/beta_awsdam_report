@@ -268,13 +268,40 @@ shinyApp(
       
       # Going down list of 31 possible iterations.
       
-      case_when(hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 1)
-        # xdf$I>mincut~"Intermittent",
-        # xdf$E>mincut & SIfish==1 & SIalg==2 ~"At Least Intermittent",
-        # xdf$E>mincut~"Ephemeral",
-        # xdf$pALI>mincut~"At Least Intermittent",
-        # SIfish==1 & SIalg==2 ~ "At Least Intermittent",
-        # T~"Need more information")
+      case_when(hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 1,
+        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 2,
+        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 1 & SIfish == 0 ~ 3,
+        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 1 & SIfish == 1 ~ 4,
+        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 2 ~ 4,
+        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 5,
+        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 6,
+        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 1 & SIfish == 0 ~ 7,
+        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 1 & SIfish == 1 ~ 8,
+        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 2 ~ 8,
+        hydro == 0 & BMI == 0.5 & EPT == 1 ~ 9,
+        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 10,
+        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 11,
+        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 1 & SIfish == 0 ~ 12,
+        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 1 & SIfish == 1 ~ 13,
+        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 2 ~ 13,
+        hydro == 0 & BMI == 1 & EPT == 1 ~ 14,
+        hydro == 0.5 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 15,
+        hydro == 0.5 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 16,
+        hydro == 0.5 & BMI == 0 & EPT == 0 & SIalg > 0 ~ 17,
+        hydro == 0.5 & BMI == 0.5 & EPT == 0 & SIalg == 0 ~ 18,
+        hydro == 0.5 & BMI == 0.5 & EPT == 0 & SIalg > 0 ~ 19,
+        hydro == 0.5 & BMI == 0.5 & EPT == 1 ~ 20,
+        hydro == 0.5 & BMI == 1 & EPT == 0 & SIalg == 0 ~ 21,
+        hydro == 0.5 & BMI == 1 & EPT == 0 & SIalg > 0 ~ 22,
+        hydro == 0.5 & BMI == 1 & EPT == 1 & SIalg == 0 ~ 23,
+        hydro == 0.5 & BMI == 1 & EPT == 1 & SIalg > 0 ~ 24,
+        hydro == 1 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 25,
+        hydro == 1 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 26,
+        hydro == 1 & BMI == 0 & EPT == 0 & SIalg > 0 ~ 27,
+        hydro == 1 & BMI == 0.5 & EPT == 0 ~ 28,
+        hydro == 1 & BMI == 0.5 & EPT == 1 ~ 29,
+        hydro == 1 & BMI == 1 & EPT == 0 ~ 30,
+        hydro == 1 & BMI == 1 & EPT == 1 ~ 31)
       
     })
     
