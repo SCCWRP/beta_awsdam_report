@@ -254,6 +254,30 @@ shinyApp(
     
     #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI".
     
+    # Based on indicator inputs, this will choose which table to display.
+    
+    predict_figure <- reactive({
+      
+      # Using similar code from above to convert inputs to numerical values.
+      hydro <- as.numeric(input$radio_hydro)
+      BMI <- as.numeric(input$radio_bmi)
+      EPT <- as.numeric(input$radio_ept)
+      SIalg <- as.numeric(ifelse(input$radio_algae == 0, 0,
+        ifelse(input$radio_algae == 1, 1, 2))) 
+      SIfish <- as.numeric(input$fish)
+      
+      # Going down list of 31 possible iterations.
+      
+      case_when(hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 1)
+        # xdf$I>mincut~"Intermittent",
+        # xdf$E>mincut & SIfish==1 & SIalg==2 ~"At Least Intermittent",
+        # xdf$E>mincut~"Ephemeral",
+        # xdf$pALI>mincut~"At Least Intermittent",
+        # SIfish==1 & SIalg==2 ~ "At Least Intermittent",
+        # T~"Need more information")
+      
+    })
+    
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
       content = function(file) {
@@ -338,7 +362,8 @@ shinyApp(
             input$radio_situation == 6~"Other (explain in notes)",
             input$radio_situation == 7~"None"),
           bo = input$hydro_comments,
-          rf = predict_flowduration())
+          rf = predict_flowduration(),
+          tbl = predict_figure())
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document

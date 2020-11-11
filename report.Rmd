@@ -64,6 +64,7 @@ params:
   bn: NA
   bo: NA
   rf: NA
+  tbl: NA
   
 ---
 
@@ -90,8 +91,9 @@ cat(params[["rf"]])
 ```
 
 Final Classification:
-```{r, out.width='50%', fig.align='center'}
-knitr::include_graphics(here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.jpg"))
+```{r, out.width='75%', fig.align='center'}
+knitr::include_graphics(
+  case_when(params$tbl == 1 ~ here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.png")))
 ```
 
 ***
