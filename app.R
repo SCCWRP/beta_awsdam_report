@@ -2,6 +2,7 @@
 # Shiny Application for pdf Report Generation
 # Created by: Heili Lowman
 # Created on: September 30, 2020
+# Last edited: November 11, 2020
 
 # Setup -------------------------------------------------------------------
 
@@ -330,29 +331,6 @@ shinyApp(
       
     })
     
-    # Generate realtime map for pdf output.
-    
-    # field_map <- reactive({
-    #   
-    #    g <- input$lat
-    #    h <- input$lon
-    #    d <- input$waterway
-    #    site_data <- data.frame(d, g, h)
-    #   
-    #    site_data <- data.frame(params$d, params$g, params$h) # create dataframe
-    #    names(site_data) <- c("site", "lat", "lon") # rename columns
-    #    site_sf <- st_as_sf(site_data, # create sf compatible dataframe
-    #      coords = c("lon", "lat"), # identify lon & lat
-    #      remove = F, # do not remove lat/lon columns
-    #      crs = 4326) # use WGS84 projection
-    #    
-    #    mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-    #    mapview::mapview(site_sf, legend = FALSE) # adds in map
-    #     
-    #    # mapshot(site_map, file = paste0(getwd(), "/map.png"),
-    #    # selfcontained = FALSE) # exports map as a .png to temporary working directory
-    #    
-    #    })
     
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
