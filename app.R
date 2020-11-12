@@ -175,13 +175,6 @@ shinyApp(
     radioButtons("fish", label = "Fish (other than mosquitofish)", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
     fileInput("fish1", label = HTML("Fish Photo #1<br />Upload photo file here.")), # file input box
     
-    # radioButtons("alg_si", label = "Algae cover > 10%", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
-    # fileInput("alg_si1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
-    
-    #textInput("fishnotes", label = h5("General Notes about Fish"), value = "Enter text..."), # text input box
-    #textInput("amph", label = h5("Aquatic Amphibians Observed"), value = "Enter text..."), # text input box
-    #textInput("snake", label = h5("Aquatic Snakes Observed"), value = "Enter text..."), # text input box
-    
 # Supplemental Info -------------------------------------------------------
     
     hr(), # adds divider
