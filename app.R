@@ -424,7 +424,6 @@ shinyApp(
             input$radio_situation == 6~"Other (explain in notes)",
             input$radio_situation == 7~"None"),
           bo = input$hydro_comments,
-          #fm = field_map(),
           rf = predict_flowduration(),
           tbl = predict_figure())
         
