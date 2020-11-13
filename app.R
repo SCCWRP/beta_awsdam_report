@@ -46,9 +46,29 @@ shinyApp(
     tabPanel(h4("Background Information"),
       br(),
       column(width = 6,
-        p("This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."))),
-      
-    tabPanel(h4("Report Generation"),
+        p("This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. Contact Raphael Mazor (raphaelm@sccwrp.org) with questions."),
+        br(),
+        HTML("<p>Streams may exhibit a diverse range of hydrologic regimes that strongly influence physical, chemical and biological characteristics of streams and their adjacent riparian areas. Such hydrologic information supports many management decisions. One important aspect of hydrologic regime is streamflow duration—the length of time that a stream supports sustained surface flow. However, requisite hydrologic data to determine flow duration is unavailable at most reaches nationwide. Although maps, hydrologic models, and other data resources exist (e.g., the <a href='https://www.usgs.gov/core-science-systems/ngp/national-hydrography/national-hydrography-dataset?qt-science_support_page_related_con=0#qt-science_support_page_related_con'>National Hydrography Dataset</a>), they may exclude small headwater streams, and limitations on accuracy and spatial or temporal resolution may reduce their utility for many management applications. Therefore, there is a need for rapid, field-based methods to determine flow duration class at the reach scale in the absence of long-term hydrologic data (e.g., <a href='https://www.mdpi.com/2073-4441/12/9/2545'>Fritz et al., 2020</a>).</p>"),
+        br(),
+        p("For the purposes of the method presented here, stream reaches are classified into three types based on increasing streamflow duration:"),
+        HTML("<p>- <em>Ephemeral</em> reaches flow only in direct response to precipitation. Water typically flows only during and shortly after large precipitation events, the streambed is always above the water table, and stormwater runoff is the primary source of water.<p>"),
+        HTML("<p>- <em>Intermittent</em> reaches are channels that contain water for only part of the year, typically during the wet season, where the streambed may be below the water table and/or where the snowmelt from surrounding uplands provides sustained flow. The flow may vary greatly with stormwater runoff.<p>"),
+        HTML("<p>- <em>Perennial</em> reaches contain water continuously during a year of normal rainfall, often with the streambed located below the water table for most of the year. Groundwater supplies the baseflow for perennial reaches, but flow is also supplemented by stormwater runoff or snowmelt.<p>"),
+        br(),
+        img(src="SDAMs.png", height="80%", width="80%"),
+        br(),
+        HTML("<p>This online reporting tool allows application of the beta Arid West Streamflow Duration Assessment Method (AW SDAM), the EPA’s standard method for the Arid West region outside the Pacific Northwest (which is covered by method described in <a href='https://www.epa.gov/sites/production/files/2016-01/documents/streamflow_duration_assessment_method_pacific_northwest_2015.pdf'>Nadeau 2015</a>). The AW SDAM is based on the presence of biological indicators that are known to respond to gradients of streamflow duration. The first four indicators are evaluated together to assign a preliminary flow duration class to a reach, whereas the fifth indicator consists of <em>single indicators</em> whose presence determines that a reach is <em>at least intermittent</em>, either supporting or superseding the preliminary classification determined from the other four indicators. An <em>at least intermittent classification</em> indicates that the reach is not ephemeral, but the biological indicator data does not determine if the reach is perennial or intermittent with high confidence.<p>"),
+        br(),
+        p("(1) How many hydrophytic plant species (up to five) are growing in the channel, or within one half-channel width of the channel?"),
+        p("(2) How many aquatic macroinvertebrates are quantified during a 15-minute search?"),
+        p("(3) Is there evidence of aquatic stages of Ephemeroptera, Plecoptera, or Trichoptera (EPT)? "),
+        p("(4) Are algae found on the streambed?"),
+        p("(5) Are single indicators (i.e., the presence of fish or >10% algal cover) of intermittent or perennial streamflow duration observed?"),
+        br(),
+        HTML("<p>This beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
+        br())),
+
+    tabPanel(h4("Enter Data"),
       br(),
       
     # General Info ------------------------------------------------------------
@@ -199,7 +219,8 @@ shinyApp(
         tabPanel(h4("Additional Resources"),
           br(),
           column(width = 6,
-            p("For additional information, please refer to the field manual and protocol developed for the Arid West Streamflow Duration Assessment Method. Field forms and additional materials can be found at INSERT HYPERLINK HERE.")))
+            HTML("<p>For additional information, please refer to the field manual and protocol developed for the Arid West Streamflow Duration Assessment Method. Field forms and additional materials can be found on <a href='https://www.epa.gov/streamflow-duration-assessment'>the Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.</p>")
+        ))
         )),
   
 # Server ------------------------------------------------------------------
