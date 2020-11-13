@@ -162,7 +162,7 @@ Location:
 cat(paste0(params$g," N, ", params$h, " W"))
 ```
 
-```{r}
+```{r, out.width='50%', fig.align='center', fig.cap=params$d}
 
 # Static placeholder map
 
