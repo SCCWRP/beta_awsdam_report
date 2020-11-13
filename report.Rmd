@@ -26,7 +26,6 @@ params:
   u: NA
   v: NA
   w: NA
-  x: NA
   aa: NA
   ab: NA
   ac: NA
@@ -37,7 +36,6 @@ params:
   ah: NA
   ai: NA
   aj: NA
-  ak: NA
   al: NA
   am: NA
   an: NA
@@ -57,8 +55,6 @@ params:
   bg: NA
   bh: NA
   bi: NA
-  bj: NA
-  bk: NA
   bl: NA
   bm: NA
   bn: NA
@@ -91,7 +87,7 @@ cat(params[["rf"]])
 ```
 
 Final Classification:
-```{r, out.width='75%', fig.align='center', fig.cap = "Indicator presence/absence denoted in green based on input to tool."}
+```{r, out.width='50%', fig.align='center', fig.cap = "Indicator presence/absence denoted in green based on input to tool."}
 knitr::include_graphics(
   case_when(params$tbl == 1 ~ here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.png"),
     params$tbl == 2 ~ here::here("02_H0_AI0_EPT0_ALG0_SI1_ALI-1.png"),
@@ -166,48 +162,52 @@ Location:
 cat(paste0(params$g," N, ", params$h, " W"))
 ```
 
+```{r, out.width='50%', fig.align='center', fig.cap=params$d}
+
+# Static placeholder map
+
+# a <- 33.741172
+# b <- -118.375619
+# c <- "Altamira Canyon Creek"
+# site_data <- data.frame(c, a, b)
+# names(site_data) <- c("site", "lat", "lon") # rename columns
+# site_sf <- st_as_sf(site_data, # create sf compatible dataframe
+#    coords = c("lon", "lat"), # identify lon & lat
+#    remove = F, # do not remove lat/lon columns
+#    crs = 4326) # use WGS84 projection
+# 
+# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be topographic map
+# site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
+#   
+# mapshot(site_map, file = paste0(getwd(), "/map.png"),
+#     remove_controls = c("zoomControl", "homeButton", "layersControl"),
+#     selfcontained = FALSE) # exports map as a .png to temporary working directory
+
+knitr::include_graphics(here::here("map.png"))
+
+```
+
 ```{r}
 
-# Used to test map functionality
- # a <- 34.470264
- # b <- -119.688813
- # c <- "Cotton Candy Canyon"
- # site_data <- data.frame(c, a, b)
+# Reactive map code that needs to be properly linked to the report:
 
 # site_data <- data.frame(params$d, params$g, params$h) # create dataframe
 # names(site_data) <- c("site", "lat", "lon") # rename columns
 # site_sf <- st_as_sf(site_data, # create sf compatible dataframe
-#   coords = c("lon", "lat"), # identify lon & lat
-#   remove = F, # do not remove lat/lon columns
-#   crs = 4326) # use WGS84 projection
-
- # mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be topographic map
- # site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
-#  
-# mapshot(site_map, file = paste0(getwd(), "/map.png"),
-#    selfcontained = FALSE) # exports map as a .png to temporary working directory
-
-```
-
-```{r, out.width='50%', fig.align='center', fig.cap=params$d}
-
-site_data <- data.frame(params$d, params$g, params$h) # create dataframe
-names(site_data) <- c("site", "lat", "lon") # rename columns
-site_sf <- st_as_sf(site_data, # create sf compatible dataframe
-   coords = c("lon", "lat"), # identify lon & lat
-   remove = F, # do not remove lat/lon columns
-   crs = 4326) # use WGS84 projection
-
-mapviewOptions(basemaps = "Esri.WorldImagery", # set output to be topographic map
-               layers.control.pos = "topright", # move layers widget
-               homebutton = FALSE) # delete zoom button
-site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
-
-mapshot(site_map, file = paste0(tempdir(), "/site_map.png"),
-        remove_controls = c("zoomControl", "homeButton", "layersControl"),
-        selfcontained = FALSE) # exports map as a .png to temporary working directory
-
-knitr::include_graphics("site_map.png")
+#    coords = c("lon", "lat"), # identify lon & lat
+#    remove = F, # do not remove lat/lon columns
+#    crs = 4326) # use WGS84 projection
+# 
+# mapviewOptions(basemaps = "Esri.WorldImagery", # set output to be topographic map
+#                layers.control.pos = "topright", # move layers widget
+#                homebutton = FALSE) # delete zoom button
+# site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
+# 
+# mapshot(site_map, file = paste0(tempdir(), "/site_map.png"),
+#         remove_controls = c("zoomControl", "homeButton", "layersControl"),
+#         selfcontained = FALSE) # exports map as a .png to temporary working directory
+# 
+# knitr::include_graphics("site_map.png")
 
 ```
 

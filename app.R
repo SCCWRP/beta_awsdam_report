@@ -2,7 +2,7 @@
 # Shiny Application for pdf Report Generation
 # Created by: Heili Lowman
 # Created on: September 30, 2020
-# Last edited: November 11, 2020
+# Last edited: November 13, 2020
 
 # Setup -------------------------------------------------------------------
 
@@ -126,10 +126,7 @@ shinyApp(
     tags$div(
       "Field form instructions: Record up to 5 hydrophytic plant species (FACW or OBL in the Arid West regional wetland plant list) within the assessment area: within the channel or up to one half-channel width. Explain in notes if species has an odd distribution (e.g., covers less than 2% of assessment area, long-lived species solely represented by seedlings, or long-lived species solely represented by specimens in decline), or if there is uncertainty about the identification. Enter photo ID, or check if photo is taken."), # subtext
     br(), # line break
-    
-    #textInput("checklist", label = h5("Hydrophytic Vegetation Checklist Used"), value = "Enter text..."), # text input box
-    # hydrophyte input for report
-    #textInput("hydro", label = h5("Hydrophytes (number of species) - exact number observed"), value = "Enter text..."), # text input box
+
     # hydrophyte input for determination
     radioButtons(inputId = "radio_hydro", label = "How many hydrophytic species are found in or near the channel? - select one of the below options", choices = list("None" = 0, "1 or 2 species" = 0.5, "3 or more species" = 1), selected = 0), # radio buttons
     br(), # line break
@@ -155,12 +152,8 @@ shinyApp(
     tags$div("Field form instructions: Do not count mosquito larvae."), # subtext
     br(), # line break
     
-    # inverts input for report
-    # textInput("abundance", label = h5("How many aquatic invertebrates are found? - exact number of individuals observed"), value = "Enter text..."), # text input box
     # inverts input for determination
     radioButtons(inputId = "radio_bmi", label = "How many aquatic invertebrates are quantified in a 15-minute search? (number of individuals observed) - select one of the below options", choices = list("None" = 0, "1 to 19" = 0.5, "20 or more" = 1), selected = 0), # radion buttons
-    # EPT input for report
-    # textInput("ept", label = h5("Are EPT (Ephemeroptera, Plecoptera, and Trichoptera) present?"), value = "Enter text..."), # text input box
     # EPT input for determination
     radioButtons(inputId = "radio_ept", label = "Is there evidence of aquatic stages of EPT (Ephemeroptera, Plecoptera, and Trichoptera)? - select one of the below options", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio buttons
     #textInput("invtaxa", label = h5("Invertebrate Taxa Observed"), value = "Enter text..."), # text input box
@@ -177,8 +170,6 @@ shinyApp(
       "Field form instructions: Estimate cover of live or dead algae in the streambed (local growth only)."), # subtext
     br(), # line break
     
-    # algae input for report
-    # textInput("algae", label = h5("Cover of Live or Dead Algal Mats in Streambed"), value = "Enter text..."), # text input box
     # algae input for determination
     radioButtons(inputId = "radio_algae", label = "Are algae found on the streambed? - select one of the below options", choices = list("Not detected" = 0, "Yes, <10% cover" = 1, "Yes, >10% cover" = 2), selected = 0),
     fileInput("alg1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
@@ -251,7 +242,7 @@ shinyApp(
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
     #fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
     
-    # Code for stream classification determination (using random forest model results)
+    # Code for stream classification determination (using random forest results)
     predict_flowduration <- reactive({
       
       # Convert all measure inputs to numerical values for use in our function.
@@ -295,7 +286,6 @@ shinyApp(
     #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI".
     
     # Based on indicator inputs, this will choose which table to display.
-    
     predict_figure <- reactive({
       
       # Using similar code from above to convert inputs to numerical values.
@@ -368,11 +358,12 @@ shinyApp(
           i = input$datum,
           j = input$weather,
           k = input$situation,
-          l = ifelse(input$radio_use == 0, "Urban/industrial/residential",
-            ifelse(input$radio_use == 1, "Agricultural",
-              ifelse(input$radio_use == 2, "Developed open-space",
-                ifelse(input$radio_use == 3, "Forested",
-                  ifelse(input$radio_use == 4, "Other natural", "Other"))))),
+          l = case_when(input$radio_use == 0 ~ "Urban/industrial/residential",
+                        input$radio_use == 1 ~ "Agricultural",
+                        input$radio_use == 2 ~ "Developed open-space",
+                        input$radio_use == 3 ~ "Forested",
+                        input$radio_use == 4 ~ "Other natural", 
+                        input$radio_use == 5 ~ "Other"),
           m = input$surfflow,
           n = input$subflow,
           o = input$pool,
@@ -383,7 +374,6 @@ shinyApp(
           u = fig3(),
           v = fig4(),
           w = fig5(),
-          #x = input$checklist,
           aa = fig6(),
           ab = input$hyd1_cap,
           ac = fig7(),
@@ -392,22 +382,24 @@ shinyApp(
           af = input$hyd3_cap,
           ag = fig9(),
           ah = input$hyd4_cap,
-          ai = ifelse(input$radio_bmi == 0, "None", 
-            ifelse(input$radio_bmi == 0.5, "1 to 19", "20+")),
+          ai = case_when(input$radio_bmi == 0 ~ "None", 
+                         input$radio_bmi == 0.5 ~ "1 to 19",
+                         input$radio_bmi == 1 ~ "20+"),
           aj = ifelse(input$radio_ept == 0, "No", "Yes"),
-          #ak = input$invtaxa,
           al = fig10(),
           am = fig11(),
           an = input$invnotes,
-          ao = ifelse(input$radio_algae == 0, "Not detected",
-            ifelse(input$radio_algae == 1, "Yes, <10% cover", "Yes >10% cover")),
+          ao = case_when(input$radio_algae == 0 ~ "Not detected",
+                         input$radio_algae == 1 ~ "Yes, <10% cover",
+                         input$radio_algae == 2 ~ "Yes >10% cover"),
           ap = fig12(),
           aq = ifelse(input$fish == 0, "No", "Yes"),
           ar = fig13(),
           as = input$amph,
           at = input$snake,
-          av = ifelse(input$radio_hydro == 0, "0 species", 
-            ifelse(input$radio_hydro == 0.5, "1 - 2 species", "3+ species")),
+          av = case_when(input$radio_hydro == 0 ~ "0 species",
+                         input$radio_hydro == 0.5 ~ "1 - 2 species",
+                         input$radio_hydro == 1 ~ "3+ species"),
           ba = fig14(),
           bb = input$algnotes,
           bc = input$hydnotes,
@@ -417,8 +409,6 @@ shinyApp(
           bg = input$add_notes,
           bh = fig15(),
           bi = input$add_cap2,
-          #bj = fig16(),
-          #bk = ifelse(input$alg_si == 0, "No", "Yes"),
           bm = case_when(input$radio_weather == 0~"Storm/heavy rain",
             input$radio_weather == 1~"Steady rain",
             input$radio_weather == 2~"Intermittent rain",
