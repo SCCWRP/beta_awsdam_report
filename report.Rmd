@@ -166,46 +166,46 @@ cat(paste0(params$g," N, ", params$h, " W"))
 
 # Static placeholder map
 
-# a <- 33.741172
-# b <- -118.375619
-# c <- "Altamira Canyon Creek"
-# site_data <- data.frame(c, a, b)
-# names(site_data) <- c("site", "lat", "lon") # rename columns
-# site_sf <- st_as_sf(site_data, # create sf compatible dataframe
-#    coords = c("lon", "lat"), # identify lon & lat
-#    remove = F, # do not remove lat/lon columns
-#    crs = 4326) # use WGS84 projection
-# 
-# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-# site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
-#   
-# mapshot(site_map, file = paste0(getwd(), "/map.png"),
-#     remove_controls = c("zoomControl", "homeButton", "layersControl"),
-#     selfcontained = FALSE) # exports map as a .png to temporary working directory
-#
-# knitr::include_graphics(here::here("map.png"))
-
-```
-
-```{r, out.width='50%', fig.align='center', fig.cap=params$d}
-
-# Reactive map code that needs to be properly linked to the report:
-
-site_data_react <- data.frame(params$d, params$g, params$h) # create dataframe
-names(site_data_react) <- c("site", "lat", "lon") # rename columns
-site_rct_sf <- st_as_sf(site_data_react, # create sf compatible dataframe
+a <- 33.741172
+b <- -118.375619
+c <- "Altamira Canyon Creek"
+site_data <- data.frame(c, a, b)
+names(site_data) <- c("site", "lat", "lon") # rename columns
+site_sf <- st_as_sf(site_data, # create sf compatible dataframe
    coords = c("lon", "lat"), # identify lon & lat
    remove = F, # do not remove lat/lon columns
    crs = 4326) # use WGS84 projection
 
 mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-site_map_react <- mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
+site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
 
-mapshot(site_map_react, file = paste0(tempdir(), "/site_map_react.png"),
-        remove_controls = c("zoomControl", "homeButton", "layersControl"),
-        selfcontained = FALSE) # exports map as a .png to temporary working directory
+mapshot(site_map, file = paste0(getwd(), "/map.png"),
+    remove_controls = c("zoomControl", "homeButton", "layersControl"),
+    selfcontained = FALSE) # exports map as a .png to temporary working directory
 
-knitr::include_graphics("site_map_react.png")
+knitr::include_graphics(here::here("map.png"))
+
+```
+
+```{r, out.width='50%', fig.align='center'}
+
+# Reactive map code that needs to be properly linked to the report:
+
+# site_data_react <- data.frame(params$d, params$g, params$h) # create dataframe
+# names(site_data_react) <- c("site", "lat", "lon") # rename columns
+# site_rct_sf <- st_as_sf(site_data_react, # create sf compatible dataframe
+#    coords = c("lon", "lat"), # identify lon & lat
+#    remove = F, # do not remove lat/lon columns
+#    crs = 4326) # use WGS84 projection
+# 
+# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+# site_map_react <- mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
+# 
+# mapshot(site_map_react, file = paste0(tempdir(), "/site_map_react.png"),
+#         remove_controls = c("zoomControl", "homeButton", "layersControl"),
+#         selfcontained = FALSE) # exports map as a .png to temporary working directory
+# 
+# knitr::include_graphics("site_map_react.png")
 
 # This code works locally.
 
