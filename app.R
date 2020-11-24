@@ -276,12 +276,17 @@ shinyApp(
       else
         case_when(xdf$P>mincut~"Perennial",
           xdf$I>mincut~"Intermittent",
-          xdf$E>mincut & SIfish==1 & SIalg==2 ~"At Least Intermittent",
+          xdf$E>mincut & SIfish==1 ~"At Least Intermittent", # either
+          xdf$E>mincut & SIalg==2 ~"At Least Intermittent", # or
           xdf$E>mincut~"Ephemeral",
           xdf$pALI>mincut~"At Least Intermittent",
-          SIfish==1 & SIalg==2 ~ "At Least Intermittent",
+          xdf$pALI>mincut~"At Least Intermittent",
+          SIfish==1 ~ "At Least Intermittent", # either
+          SIalg==2 ~ "At Least Intermittent", # or
           T~"Need more information")
     })
+    
+    # hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 5,
     
     #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI".
     
@@ -390,7 +395,7 @@ shinyApp(
           am = fig11(),
           an = input$invnotes,
           ao = case_when(input$radio_algae == 0 ~ "Not detected",
-                         input$radio_algae == 1 ~ "Yes, <10% cover",
+                         input$radio_algae == 1 ~ "No, <10% cover",
                          input$radio_algae == 2 ~ "Yes >10% cover"),
           ap = fig12(),
           aq = ifelse(input$fish == 0, "No", "Yes"),

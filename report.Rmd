@@ -83,7 +83,7 @@ cat(params$c)
 ## Classification:
 
 ```{r}
-cat(params[["rf"]])
+#cat(params[["rf"]])
 ```
 
 Final Classification:
