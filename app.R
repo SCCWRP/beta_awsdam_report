@@ -90,7 +90,7 @@ shinyApp(
     textInput("lon", label = h5("Lon (W, decimal degrees):"), value = "Enter text..."), # text input box
     textInput("datum", label = h5("Datum:"), value = "Enter text..."), # text input box
     
-    radioButtons("radio_use", label = h5("Surrounding land-use within 100 m (check one)."), choices = list("Urban/industrial/residential" = 0, "Agricultural" = 1, "Developed open-space" = 2, "Forested" = 3, "Other natural" = 4, "Other" = 5), selected = 5), # radio buttons
+    checkboxGroupInput("check_use", label = h5("Surrounding land-use within 100 m (check at least one)."), choices = list("Urban/industrial/residential" = 0, "Agricultural" = 1, "Developed open-space" = 2, "Forested" = 3, "Other natural" = 4, "Other" = 5), selected = 5), # radio buttons
     textInput("boundary", label = h5("Describe reach boundaries:"), value = "Enter text..."), # text input box
     
     textInput("channel", label = h5("Mean channel width (m)"), value = "Enter text..."), # text input box
@@ -363,12 +363,12 @@ shinyApp(
           i = input$datum,
           j = input$weather,
           k = input$situation,
-          l = case_when(input$radio_use == 0 ~ "Urban/industrial/residential",
-                        input$radio_use == 1 ~ "Agricultural",
-                        input$radio_use == 2 ~ "Developed open-space",
-                        input$radio_use == 3 ~ "Forested",
-                        input$radio_use == 4 ~ "Other natural", 
-                        input$radio_use == 5 ~ "Other"),
+          l = case_when(input$check_use == 0 ~ "Urban/industrial/residential",
+                        input$check_use == 1 ~ "Agricultural",
+                        input$check_use == 2 ~ "Developed open-space",
+                        input$check_use == 3 ~ "Forested",
+                        input$check_use == 4 ~ "Other natural", 
+                        input$check_use == 5 ~ "Other"),
           m = input$surfflow,
           n = input$subflow,
           o = input$pool,
