@@ -75,10 +75,6 @@ knitr::opts_chunk$set(comment = NA)
 ```
 
 ***
-Site code or identifier:
-```{r}
-cat(params$c)
-```
 
 ## Classification:
 
@@ -86,8 +82,7 @@ cat(params$c)
 #cat(params[["rf"]])
 ```
 
-Final Classification:
-```{r, out.width='50%', fig.align='center', fig.cap = "Indicator presence/absence denoted in green based on input to tool."}
+```{r, out.width='65%', fig.align='center', fig.cap = "Indicator presence/absence denoted in green based on input to tool."}
 knitr::include_graphics(
   case_when(params$tbl == 1 ~ here::here("01_H0_AI0_EPT0_ALG0_SI0_EPH-1.png"),
     params$tbl == 2 ~ here::here("02_H0_AI0_EPT0_ALG0_SI1_ALI-1.png"),
@@ -126,6 +121,11 @@ knitr::include_graphics(
 
 ## General Site Information
 
+Site code or identifier:
+```{r}
+cat(params$c)
+```
+
 Project name or number:
 ```{r}
 # Adding cat() to all of the outputs to remove the [1] that would otherwise print immediately before them.
@@ -162,7 +162,7 @@ Location:
 cat(paste0(params$g," N, ", params$h, " W"))
 ```
 
-```{r, out.width='50%', fig.align='center', fig.cap=params$d}
+```{r, out.width='50%', fig.align='center', fig.cap="Note: This map is a static figure that will be replaced in the next draft of this tool."}
 
 # Static placeholder map
 
@@ -359,7 +359,7 @@ cat(params$an)
 
 ## Algae Cover
 
-Cover of live or dead algal in the streambed:
+Cover of live or dead algae in the streambed:
 ```{r}
 cat(params$ao)
 ```

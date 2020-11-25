@@ -2,7 +2,7 @@
 # Shiny Application for pdf Report Generation
 # Created by: Heili Lowman
 # Created on: September 30, 2020
-# Last edited: November 13, 2020
+# Last edited: November 25, 2020
 
 # Setup -------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ shinyApp(
     
     h3("Hydrophytic Plants"), # Adds section header
     tags$div(
-      "Field form instructions: Record up to 5 hydrophytic plant species (FACW or OBL in the Arid West regional wetland plant list) within the assessment area: within the channel or up to one half-channel width. Explain in notes if species has an odd distribution (e.g., covers less than 2% of assessment area, long-lived species solely represented by seedlings, or long-lived species solely represented by specimens in decline), or if there is uncertainty about the identification. Enter photo ID, or check if photo is taken."), # subtext
+      "Field form instructions: Record up to 5 hydrophytic plant species (FACW or OBL in the Arid West regional wetland plant list) within the assessment area: within the channel or up to one half-channel width. Explain in figure caption if species has an odd distribution (e.g., covers less than 2% of assessment area, long-lived species solely represented by seedlings, or long-lived species solely represented by specimens in decline), or if there is uncertainty about the identification. Enter photo ID, or check if photo is taken."), # subtext
     br(), # line break
 
     # hydrophyte input for determination
@@ -179,8 +179,8 @@ shinyApp(
 
     hr(), # adds divider
     
-    h3("Single Indicators"), # Adds section header
-    tags$div("Field form instructions: Single indicators result in classification of 'At least intermittent', in the absence of other information."), # subtext
+    h3("Fish"), # Adds section header
+    
     br(), # line break
     
     radioButtons("fish", label = "Fish (other than mosquitofish)", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
@@ -190,7 +190,7 @@ shinyApp(
     
     hr(), # adds divider
     h3("Supplemental Information"), # Adds section header
-    tags$div("Field form instructions: e.g., aquatic life stages of amphibians, snakes, or turtles; iron-oxidizing bacteria and fungi; hydric soils, etc."), # subtext
+    tags$div("Field form instructions: If observed, note the presence of the aquatic life stages of amphibians, snakes, or turtles; iron-oxidizing bacteria and fungi; hydric soils; aquatic invertebrates that prefer perennial streams etc."), # subtext
     br(), # line break
     textInput("other_ind", label = h5("Supplemental information"), value = "Enter text..."), # text input box
     
