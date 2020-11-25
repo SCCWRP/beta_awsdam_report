@@ -211,7 +211,11 @@ shinyApp(
           br(),
           column(width = 6,
             HTML("<p>For additional information, please refer to the field manual and protocol developed for the Arid West Streamflow Duration Assessment Method. Field forms and additional materials can be found on <a href='https://www.epa.gov/streamflow-duration-assessment'>the Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.</p>")
-        ))
+        ),
+          br(),
+          column(width = 6,
+            HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
+          ))
         )),
   
 # Server ------------------------------------------------------------------
