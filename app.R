@@ -142,7 +142,7 @@ shinyApp(
     fileInput("hyd4", label = HTML("Hydrophyte Photo #4<br />Upload photo file here.")), # file input box
     textInput("hyd4_cap", label = h5("Figure Caption"), value = "Enter text..."), # text input box
     br(), # line break
-    textInput("hydnotes", label = h5("Notes on hydrophytic vegetation:"), value = "Enter text..."), # text input box
+    textInput("hydnotes", label = h5("Notes on hydrophytic vegetation (please be sure to denote if there was no vegetation at all observed within the reach):"), value = "Enter text..."), # text input box
     
 # Invertebrates -----------------------------------------------------------
 
