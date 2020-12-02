@@ -66,7 +66,10 @@ shinyApp(
         p("(5) Are single indicators (i.e., the presence of fish or >10% algal cover) of intermittent or perennial streamflow duration observed?"),
         br(),
         HTML("<p>This beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
-        br())),
+        br(),
+        HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
+      )
+      ),
 
     tabPanel(h4("Enter Data"),
       br(),
@@ -90,7 +93,7 @@ shinyApp(
     textInput("lon", label = h5("Lon (W, decimal degrees):"), value = "Enter text..."), # text input box
     textInput("datum", label = h5("Datum:"), value = "Enter text..."), # text input box
     
-    checkboxGroupInput("check_use", label = h5("Surrounding land-use within 100 m (check at least one)."), choices = list("Urban/industrial/residential" = 0, "Agricultural" = 1, "Developed open-space" = 2, "Forested" = 3, "Other natural" = 4, "Other" = 5), selected = 5), # radio buttons
+    checkboxGroupInput("check_use", label = h5("Surrounding land-use within 100 m (check one or two)."), choices = list("Urban/industrial/residential" = 0, "Agricultural" = 1, "Developed open-space" = 2, "Forested" = 3, "Other natural" = 4, "Other" = 5), selected = 5), # radio buttons
     textInput("boundary", label = h5("Describe reach boundaries:"), value = "Enter text..."), # text input box
     
     textInput("channel", label = h5("Mean channel width (m)"), value = "Enter text..."), # text input box
