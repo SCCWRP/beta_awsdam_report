@@ -36,6 +36,7 @@ params:
   ah: NA
   ai: NA
   aj: NA
+  ak: NA
   al: NA
   am: NA
   an: NA
@@ -146,22 +147,22 @@ cat(params$d)
 
 # Static placeholder map
 
-a <- 33.741172
-b <- -118.375619
-c <- "Altamira Canyon Creek"
-site_data <- data.frame(c, a, b)
-names(site_data) <- c("site", "lat", "lon") # rename columns
-site_sf <- st_as_sf(site_data, # create sf compatible dataframe
-   coords = c("lon", "lat"), # identify lon & lat
-   remove = F, # do not remove lat/lon columns
-   crs = 4326) # use WGS84 projection
-
-mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
-
-mapshot(site_map, file = paste0(getwd(), "/map.png"),
-    remove_controls = c("zoomControl", "homeButton", "layersControl"),
-    selfcontained = FALSE) # exports map as a .png to temporary working directory
+# a <- 33.741172
+# b <- -118.375619
+# c <- "Altamira Canyon Creek"
+# site_data <- data.frame(c, a, b)
+# names(site_data) <- c("site", "lat", "lon") # rename columns
+# site_sf <- st_as_sf(site_data, # create sf compatible dataframe
+#    coords = c("lon", "lat"), # identify lon & lat
+#    remove = F, # do not remove lat/lon columns
+#    crs = 4326) # use WGS84 projection
+# 
+# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+# site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
+# 
+# mapshot(site_map, file = paste0(getwd(), "/map.png"),
+#     remove_controls = c("zoomControl", "homeButton", "layersControl"),
+#     selfcontained = FALSE) # exports map as a .png to temporary working directory
 
 knitr::include_graphics(here::here("map.png"))
 
@@ -184,8 +185,10 @@ knitr::include_graphics(here::here("map.png"))
 # mapshot(site_map_react, file = paste0(tempdir(), "/site_map_react.png"),
 #         remove_controls = c("zoomControl", "homeButton", "layersControl"),
 #         selfcontained = FALSE) # exports map as a .png to temporary working directory
-# 
-# knitr::include_graphics("site_map_react.png")
+
+# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+      
+# mapview(params$map, legend = FALSE) # adds in map
 
 # This code works locally.
 
@@ -397,6 +400,15 @@ cat(params$an)
 Cover of live or dead algae in the streambed:
 ```{r}
 cat(params$ao)
+```
+
+```{r}
+
+deposit <- case_when(
+    params$ak == TRUE ~ "All observed algae appear to be deposited from an upstream source.")
+
+cat(deposit)
+
 ```
 
 ```{r, out.width='25%', fig.align='center'}

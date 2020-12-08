@@ -174,6 +174,7 @@ shinyApp(
     br(), # line break
     
     # algae input for determination
+    checkboxInput("algae_checkbox", label = "Check if all observed algae appear to be deposited from an upstream source.", value = FALSE),  
     radioButtons(inputId = "radio_algae", label = "Are algae found on the streambed? - select one of the below options", choices = list("Not detected" = 0, "Yes, <10% cover" = 1, "Yes, >10% cover" = 2), selected = 0),
     fileInput("alg1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
     textInput("algnotes", label = h5("Notes on algae cover:"), value = "Enter text..."), # text input box
@@ -251,49 +252,63 @@ shinyApp(
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
     #fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
     
+    # fig_map <- reactive({
+    #   site_data_react <- data.frame(input$waterway, 
+    #     as.numeric(input$lat), 
+    #     as.numeric(input$lon)) # create dataframe
+    #   
+    #   names(site_data_react) <- c("site", "lat", "lon") # rename columns
+    #   
+    #   st_as_sf(site_data_react, # create sf compatible dataframe
+    #     coords = c("lon", "lat"), # identify lon & lat
+    #     remove = F, # do not remove lat/lon columns
+    #     crs = 4326) # use WGS84 projection
+    #   
+    # })
+    
     # Code for stream classification determination (using random forest results)
-    predict_flowduration <- reactive({
-      
-      # Convert all measure inputs to numerical values for use in our function.
-      hydrophytes <- as.numeric(input$radio_hydro)
-      EPT <- as.numeric(input$radio_ept)
-      BMI <- as.numeric(input$radio_bmi)
-      livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # model results only take the binary yes/no, 1/0
-      SIalg <- as.numeric(ifelse(input$radio_algae == 0, 0,
-        ifelse(input$radio_algae == 1, 1, 2))) # need to account for two "yes" options in single indicators
-      SIfish <- as.numeric(input$fish)
-      
-      #assemble test data that will be input by the user
-      test.df<-data.frame(hydrophytes_3pa=hydrophytes,
-        EPT_pa=EPT,
-        BMI_20=BMI,
-        livedeadalg_pa=livedeadalg)
-      
-      #generates predictions based on random forest model outputs (frf_2) and used inputs (test.df) and flips from wide to long (1 column, 3 rows)
-      xdf <- predict(frf_2, newdata=test.df, type="prob") %>%
-        as.data.frame()
-      
-      # updated final determination of the greatest probability/classification, 2/3rds cutoff
-      mincut <-.667
-      
-      # create new column with "at least intermittent" category designation
-      xdf$pALI <- xdf$I + xdf$P
-      
-      # final determination
-      if(EPT==1 & BMI==0)
-        print("WARNING! Illogical invertebrate inputs.")
-      else
-        case_when(xdf$P>mincut~"Perennial",
-          xdf$I>mincut~"Intermittent",
-          xdf$E>mincut & SIfish==1 ~"At Least Intermittent", # either
-          xdf$E>mincut & SIalg==2 ~"At Least Intermittent", # or
-          xdf$E>mincut~"Ephemeral",
-          xdf$pALI>mincut~"At Least Intermittent",
-          xdf$pALI>mincut~"At Least Intermittent",
-          SIfish==1 ~ "At Least Intermittent", # either
-          SIalg==2 ~ "At Least Intermittent", # or
-          T~"Need more information")
-    })
+    # predict_flowduration <- reactive({
+    #   
+    #   # Convert all measure inputs to numerical values for use in our function.
+    #   hydrophytes <- as.numeric(input$radio_hydro)
+    #   EPT <- as.numeric(input$radio_ept)
+    #   BMI <- as.numeric(input$radio_bmi)
+    #   livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # model results only take the binary yes/no, 1/0
+    #   SIalg <- as.numeric(ifelse(input$radio_algae == 0, 0,
+    #     ifelse(input$radio_algae == 1, 1, 2))) # need to account for two "yes" options in single indicators
+    #   SIfish <- as.numeric(input$fish)
+    #   
+    #   #assemble test data that will be input by the user
+    #   test.df<-data.frame(hydrophytes_3pa=hydrophytes,
+    #     EPT_pa=EPT,
+    #     BMI_20=BMI,
+    #     livedeadalg_pa=livedeadalg)
+    #   
+    #   #generates predictions based on random forest model outputs (frf_2) and used inputs (test.df) and flips from wide to long (1 column, 3 rows)
+    #   xdf <- predict(frf_2, newdata=test.df, type="prob") %>%
+    #     as.data.frame()
+    #   
+    #   # updated final determination of the greatest probability/classification, 2/3rds cutoff
+    #   mincut <-.667
+    #   
+    #   # create new column with "at least intermittent" category designation
+    #   xdf$pALI <- xdf$I + xdf$P
+    #   
+    #   # final determination
+    #   if(EPT==1 & BMI==0)
+    #     print("WARNING! Illogical invertebrate inputs.")
+    #   else
+    #     case_when(xdf$P>mincut~"Perennial",
+    #       xdf$I>mincut~"Intermittent",
+    #       xdf$E>mincut & SIfish==1 ~"At Least Intermittent", # either
+    #       xdf$E>mincut & SIalg==2 ~"At Least Intermittent", # or
+    #       xdf$E>mincut~"Ephemeral",
+    #       xdf$pALI>mincut~"At Least Intermittent",
+    #       xdf$pALI>mincut~"At Least Intermittent",
+    #       SIfish==1 ~ "At Least Intermittent", # either
+    #       SIalg==2 ~ "At Least Intermittent", # or
+    #       T~"Need more information")
+    # })
     
     # hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 5,
     
@@ -306,8 +321,9 @@ shinyApp(
       hydro <- as.numeric(input$radio_hydro)
       BMI <- as.numeric(input$radio_bmi)
       EPT <- as.numeric(input$radio_ept)
-      SIalg <- as.numeric(ifelse(input$radio_algae == 0, 0,
-        ifelse(input$radio_algae == 1, 1, 2))) 
+      SIalg <- ifelse(input$algae_checkbox == TRUE, 0, # Use checkbox to override.
+        as.numeric(ifelse(input$radio_algae == 0, 0,
+        ifelse(input$radio_algae == 1, 1, 2)))) 
       SIfish <- as.numeric(input$fish)
       
       # Going down list of 31 possible iterations.
@@ -400,6 +416,7 @@ shinyApp(
                          input$radio_bmi == 0.5 ~ "1 to 19",
                          input$radio_bmi == 1 ~ "20+"),
           aj = ifelse(input$radio_ept == 0, "No", "Yes"),
+          ak = input$algae_checkbox,
           al = fig10(),
           am = fig11(),
           an = input$invnotes,
@@ -438,8 +455,10 @@ shinyApp(
             input$radio_situation == 6~"Other (explain in notes)",
             input$radio_situation == 7~"None"),
           bo = input$hydro_comments,
-          rf = predict_flowduration(),
-          tbl = predict_figure())
+          #rf = predict_flowduration(),
+          tbl = predict_figure()
+          #map = fig_map()
+          )
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
