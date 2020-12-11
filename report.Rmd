@@ -61,8 +61,8 @@ params:
   bm: NA
   bn: NA
   bo: NA
-  rf: NA
   tbl: NA
+  fig_map: NA
   
 ---
 
@@ -162,8 +162,8 @@ cat(params$d)
 #    crs = 4326) # use WGS84 projection
 # 
 # mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-# site_map <- mapview::mapview(color = "cyan", site_sf, legend = FALSE) # adds in map
-# 
+# site_map_test <- mapview::mapView(color = "cyan", site_sf, legend = FALSE) # adds in map
+
 # mapshot(site_map, file = paste0(getwd(), "/map.png"),
 #     remove_controls = c("zoomControl", "homeButton", "layersControl"),
 #     selfcontained = FALSE) # exports map as a .png to temporary working directory
@@ -176,29 +176,33 @@ cat(params$d)
 
 # Reactive map code that needs to be properly linked to the report:
 
-site_data_react <- data.frame(params$d, params$g, params$h) # create dataframe
-names(site_data_react) <- c("site", "lat", "lon") # rename columns
-site_rct_sf <- st_as_sf(site_data_react, # create sf compatible dataframe
-   coords = c("lon", "lat"), # identify lon & lat
-   remove = F, # do not remove lat/lon columns
-   crs = 4326) # use WGS84 projection
-
-mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-
-library(mapview)
-library(leaflet)
-
-mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
-
-# file.path <- paste0(tempdir(), "/site_map_react.png")
-
-# mapshot(site_map_react, file = file.path,
+# site_data_react <- data.frame(params$d, params$g, params$h) # create dataframe
+# names(site_data_react) <- c("site", "lat", "lon") # rename columns
+# site_rct_sf <- st_as_sf(site_data_react, # create sf compatible dataframe
+#     coords = c("lon", "lat"), # identify lon & lat
+#     remove = F, # do not remove lat/lon columns
+#     crs = 4326) # use WGS84 projection
+#  
+# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+#  
+# mapView(site_rct_sf, legend = FALSE) # adds in map
+#
+# mapshot(site_map_react, file = paste0(tempdir(), "/site_map_react.png"),
 #          remove_controls = c("zoomControl", "homeButton", "layersControl"),
-#          selfcontained = FALSE) # exports map as a .png to temporary working directory
-
+#          selfcontained = FALSE) # exports map as a .png to temporary directory
+#
 # knitr::include_graphics(file.path)
+# 
+# Or trying another option below.
 
-# This code works locally.
+# Per https://community.rstudio.com/t/shiny-generating-downloadable-reports-with-plot-of-htmlwidget/22042 :
+
+mapview::mapshot(x = params$fig_map,
+  url = "fig_map.html",
+  file = "fig_map.png",
+  selfcontained = FALSE)
+
+knitr::include_graphics("fig_map.png")
 
 ```
 
