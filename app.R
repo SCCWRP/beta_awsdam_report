@@ -16,6 +16,7 @@ library(imager)
 library(here)
 library(sf)
 library(mapview)
+library(leaflet)
 
 # Load dataset for random forest model
 load("FinalRF.Rdata")

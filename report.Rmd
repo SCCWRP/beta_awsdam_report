@@ -3,6 +3,7 @@ title: "Beta Streamflow Duration Assessment Method for the Arid West Classificat
 subtitle: "developed by the Southern California Coastal Water Research Project for the Environmental Protection Agency"
 date: "Report generated on: `r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
+always_allow_html: yes
 params:
   a: NA
   b: NA
@@ -72,6 +73,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Removing all "#" from appearing in the final knit document.
 knitr::opts_chunk$set(comment = NA)
+
+# Make error messages more descriptive
+options(tinytex.verbose = TRUE)
 
 ```
 
@@ -143,7 +147,7 @@ Waterway name:
 cat(params$d)
 ```
 
-```{r, out.width='55%', fig.align='center', fig.cap="Note: This map is a static figure that will be replaced in the next draft of this tool."}
+```{r, out.width='55%', fig.align='center'}
 
 # Static placeholder map
 
@@ -164,31 +168,35 @@ cat(params$d)
 #     remove_controls = c("zoomControl", "homeButton", "layersControl"),
 #     selfcontained = FALSE) # exports map as a .png to temporary working directory
 
-knitr::include_graphics(here::here("map.png"))
+# knitr::include_graphics(here::here("map.png"))
 
 ```
 
-```{r, out.width='55%', fig.align='center'}
+```{r, fig.align='center', dpi=250, fig.width=6, fig.height=4}
 
 # Reactive map code that needs to be properly linked to the report:
 
-# site_data_react <- data.frame(params$d, params$g, params$h) # create dataframe
-# names(site_data_react) <- c("site", "lat", "lon") # rename columns
-# site_rct_sf <- st_as_sf(site_data_react, # create sf compatible dataframe
-#    coords = c("lon", "lat"), # identify lon & lat
-#    remove = F, # do not remove lat/lon columns
-#    crs = 4326) # use WGS84 projection
-# 
-# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-# site_map_react <- mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
-# 
-# mapshot(site_map_react, file = paste0(tempdir(), "/site_map_react.png"),
-#         remove_controls = c("zoomControl", "homeButton", "layersControl"),
-#         selfcontained = FALSE) # exports map as a .png to temporary working directory
+site_data_react <- data.frame(params$d, params$g, params$h) # create dataframe
+names(site_data_react) <- c("site", "lat", "lon") # rename columns
+site_rct_sf <- st_as_sf(site_data_react, # create sf compatible dataframe
+   coords = c("lon", "lat"), # identify lon & lat
+   remove = F, # do not remove lat/lon columns
+   crs = 4326) # use WGS84 projection
 
-# mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
-      
-# mapview(params$map, legend = FALSE) # adds in map
+mapviewOptions(basemaps = "Esri.WorldImagery") # set output to be ESRI map
+
+library(mapview)
+library(leaflet)
+
+mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
+
+# file.path <- paste0(tempdir(), "/site_map_react.png")
+
+# mapshot(site_map_react, file = file.path,
+#          remove_controls = c("zoomControl", "homeButton", "layersControl"),
+#          selfcontained = FALSE) # exports map as a .png to temporary working directory
+
+# knitr::include_graphics(file.path)
 
 # This code works locally.
 
