@@ -197,12 +197,14 @@ cat(params$d)
 
 # Per https://community.rstudio.com/t/shiny-generating-downloadable-reports-with-plot-of-htmlwidget/22042 :
 
-mapview::mapshot(x = params$fig_map,
-  url = "fig_map.html",
-  file = "fig_map.png",
-  selfcontained = FALSE)
+# mapview::mapshot(x = params$fig_map,
+#   url = "fig_map.html",
+#   file = paste0(tempdir(), "/fig_map.png"),
+#   selfcontained = FALSE)
+# 
+# knitr::include_graphics(paste0(tempdir(), "/fig_map.png"))
 
-knitr::include_graphics("fig_map.png")
+# The above code (lines 200-205) works locally but not when deployed.
 
 ```
 
