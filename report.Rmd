@@ -62,7 +62,6 @@ params:
   bn: NA
   bo: NA
   tbl: NA
-  fig_map: NA
   
 ---
 
@@ -231,8 +230,8 @@ knitr::include_graphics(
     params$tbl == 19 ~ here::here("19_H1_AI1_EPT0_ALG1_SIX_ALI-1.png"),
     params$tbl == 20 ~ here::here("20_H1_AI1_EPT1_ALGX_SIX_ALI-1.png"),
     params$tbl == 21 ~ here::here("21_H1_AI2_EPT0_ALG0_SIX_INT-1.png"),
-    params$tbl == 22 ~ here::here("22_H1_AI2_EPT0_ALG1_SIX_ATL-1.png"),
-    params$tbl == 23 ~ here::here("23_H1_AI2_EPT1_ALG0_SIX_ATL-1.png"),
+    params$tbl == 22 ~ here::here("22_H1_AI2_EPT0_ALG1_SIX_ALI-1.png"),
+    params$tbl == 23 ~ here::here("23_H1_AI2_EPT1_ALG0_SIX_ALI-1.png"),
     params$tbl == 24 ~ here::here("24_H1_AI2_EPT1_ALG1_SIX_INT-1.png"),
     params$tbl == 25 ~ here::here("25_H2_AI0_EPT0_ALG0_SI0_NMI-1.png"),
     params$tbl == 26 ~ here::here("26_H2_AI0_EPT0_ALG0_SI1_ALI-1.png"),

@@ -256,24 +256,24 @@ shinyApp(
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
     #fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
     
-    fig_map <- reactive({
-      site_data_react <- data.frame(input$waterway,
-        as.numeric(input$lat),
-        as.numeric(input$lon)) # create dataframe
-
-      names(site_data_react) <- c("site", "lat", "lon") # rename columns
-
-      site_rct_sf <- st_as_sf(site_data_react, # create sf dataframe
-        coords = c("lon", "lat"), # identify lon & lat
-        remove = F, # do not remove lat/lon columns
-        crs = 4326) # use WGS84 projection
-      
-      mapviewOptions(basemaps = "Esri.WorldImagery") # set output to ESRI map
-      
-      mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
-
-    })
-    
+    # fig_map <- reactive({
+    #   site_data_react <- data.frame(input$waterway,
+    #     as.numeric(input$lat),
+    #     as.numeric(input$lon)) # create dataframe
+    # 
+    #   names(site_data_react) <- c("site", "lat", "lon") # rename columns
+    # 
+    #   site_rct_sf <- st_as_sf(site_data_react, # create sf dataframe
+    #     coords = c("lon", "lat"), # identify lon & lat
+    #     remove = F, # do not remove lat/lon columns
+    #     crs = 4326) # use WGS84 projection
+    #   
+    #   mapviewOptions(basemaps = "Esri.WorldImagery") # set output to ESRI map
+    #   
+    #   mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
+    # 
+    # })
+    # 
     # Code for stream classification determination (using random forest results)
     # predict_flowduration <- reactive({
     #   
@@ -464,8 +464,8 @@ shinyApp(
             input$radio_situation == 7~"None"),
           bo = input$hydro_comments,
           #rf = predict_flowduration(),
-          tbl = predict_figure(),
-          fig_map = fig_map()
+          tbl = predict_figure()#,
+          #fig_map = fig_map()
           )
         
         # Knit the document, passing in the `params` list, and eval it in a
