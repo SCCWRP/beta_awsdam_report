@@ -448,7 +448,7 @@ knitr::include_graphics(params[["ar"]])
 
 Algae cover:
 ```{r}
-cat(params$ao)
+cat(ifelse(params$ak == TRUE, "No, all observed algae appear to be deposited from an upstream source.", params$ao))
 ```
 
 ***
