@@ -191,7 +191,8 @@ shinyApp(
     
     br(), # line break
     
-    radioButtons("fish", label = "Fish (other than mosquitofish)", choices = list("Yes" = 1, "No" = 0), selected = 0), # radio button
+    radioButtons("fish", label = "Fish", choices = list("Yes (species other than mosquitofish observed)" = 2, "Yes (strictly mosquitofish observed)" = 1, "No" = 0), selected = 0), # radio button
+      
     fileInput("fish1", label = HTML("Fish Photo #1<br />Upload photo file here.")), # file input box
     
 # Supplemental Info -------------------------------------------------------
@@ -332,7 +333,7 @@ shinyApp(
       SIalg <- ifelse(input$algae_checkbox == TRUE, 0, # Use checkbox to override.
         as.numeric(ifelse(input$radio_algae == 0, 0,
         ifelse(input$radio_algae == 1, 1, 2)))) 
-      SIfish <- as.numeric(input$fish)
+      SIfish <- as.numeric(ifelse(input$fish == 2, 1, 0))
       
       # Going down list of 31 possible iterations.
       
@@ -432,7 +433,9 @@ shinyApp(
                          input$radio_algae == 1 ~ "No, <10% cover",
                          input$radio_algae == 2 ~ "Yes >10% cover"),
           ap = fig12(),
-          aq = ifelse(input$fish == 0, "No", "Yes"),
+          aq = case_when(input$fish == 0 ~ "No fish observed",
+                      input$fish == 1 ~ "No, only mosquito fish observed",
+                      input$fish == 2 ~ "Yes, fish other than mosquitofish observed"),
           ar = fig13(),
           as = input$amph,
           at = input$snake,

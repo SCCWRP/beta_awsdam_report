@@ -437,7 +437,7 @@ cat(params$bb)
 
 ## Single Indicators
 
-Fish (other than mosquitofish):
+Fish:
 ```{r}
 cat(params$aq)
 ```
