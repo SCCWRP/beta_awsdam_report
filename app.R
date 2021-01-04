@@ -61,7 +61,7 @@ shinyApp(
         br(),
         img(src="SDAMs.png", height="80%", width="80%"),
         br(),
-        HTML("<p>This online reporting tool allows application of the beta Arid West Streamflow Duration Assessment Method (AW SDAM), the EPA’s standard method for the Arid West region outside the Pacific Northwest (which is covered by method described in <a href='https://www.epa.gov/sites/production/files/2016-01/documents/streamflow_duration_assessment_method_pacific_northwest_2015.pdf'>Nadeau 2015</a>). The AW SDAM is based on the presence of biological indicators that are known to respond to gradients of streamflow duration. The first four indicators are evaluated together to assign a preliminary flow duration class to a reach, whereas the fifth indicator consists of <em>single indicators</em> whose presence determines that a reach is <em>at least intermittent</em>, either supporting or superseding the preliminary classification determined from the other four indicators. An <em>at least intermittent classification</em> indicates that the reach is not ephemeral, but the biological indicator data does not determine if the reach is perennial or intermittent with high confidence.<p>"),
+        HTML("<p>This online reporting tool allows application of the beta Streamflow Duration Assessment Method for the Arid West (SDAM AW), the EPA’s standard method for the Arid West region outside the Pacific Northwest (which is covered by method described in <a href='https://www.epa.gov/sites/production/files/2016-01/documents/streamflow_duration_assessment_method_pacific_northwest_2015.pdf'>Nadeau 2015</a>). The SDAM AW is based on the presence of biological indicators that are known to respond to gradients of streamflow duration. The first four indicators are evaluated together to assign a preliminary flow duration class to a reach, whereas the fifth indicator consists of <em>single indicators</em> whose presence determines that a reach is <em>at least intermittent</em>, either supporting or superseding the preliminary classification determined from the other four indicators. An <em>at least intermittent classification</em> indicates that the reach is not ephemeral, but the biological indicator data does not determine if the reach is perennial or intermittent with high confidence.<p>"),
         br(),
         p("(1) How many hydrophytic plant species (up to five) are growing in the channel, or within one half-channel width of the channel?"),
         p("(2) How many aquatic macroinvertebrates are quantified during a 15-minute search?"),
@@ -220,7 +220,7 @@ shinyApp(
           br(),
           column(width = 12,
           column(width = 6,
-            HTML("<p>For additional information, please refer to the field manual and protocol developed for the Arid West Streamflow Duration Assessment Method. Field forms and additional materials can be found on <a href='https://www.epa.gov/streamflow-duration-assessment'>the Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.</p>")
+            HTML("<p>For additional information, please refer to the field manual and protocol developed for the Streamflow Duration Assessment Method for the Arid West. Field forms and additional materials can be found on <a href='https://www.epa.gov/streamflow-duration-assessment'>the Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.</p>")
         )),
           br(),
           column(width = 12,
