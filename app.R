@@ -32,7 +32,7 @@ shinyApp(
   ui = fluidPage( theme = "classic",
     
     # App title
-     navbarPage("Streamflow Duration Assessment Method for the Arid West: Reporting Tool version 1.0",
+     navbarPage("Beta Streamflow Duration Assessment Method for the Arid West: Reporting Tool version 1.0",
        position = c("fixed-top")),
     
     # Adding padding due to pinning title at top
