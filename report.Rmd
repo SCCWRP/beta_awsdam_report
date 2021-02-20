@@ -1,6 +1,6 @@
 ---
 title: "Streamflow Duration Assessment Method for the Arid West Classification Report"
-subtitle: "Reporting Tool version 1.0"
+subtitle: "Online Report Generating Tool Version 1.0"
 date: "Report generated on: `r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 always_allow_html: yes
