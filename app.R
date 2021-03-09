@@ -220,8 +220,13 @@ shinyApp(
           br(),
           column(width = 12,
           column(width = 6,
-            HTML("<p>For additional information, please refer to the field manual and protocol developed for the Streamflow Duration Assessment Method for the Arid West. Field forms and additional materials can be found on <a href='https://www.epa.gov/streamflow-duration-assessment'>the Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.</p>")
+            HTML("<p>For additional information, please refer to the user manual developed for the Beta Streamflow Duration Assessment Method for the Arid West. Information about this method can be found on <a href='https://www.epa.gov/streamflow-duration-assessment/beta-streamflow-duration-assessment-method-arid-west'>the Environmental Protection Agency's Streamflow Duration Assessment Methods for the Arid West homepage</a>.</p>")
         )),
+          br(),
+          column(width = 12,
+               column(width = 6,
+                      HTML("<p>The user manual, training material, and other resources may be accessed from the <a href ='https://betasdamaw-sccwrp.hub.arcgis.com'> SDAM AW Training Website</a>.</p>")
+               )),
           br(),
           column(width = 12,
           column(width = 6,
