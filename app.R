@@ -32,7 +32,7 @@ shinyApp(
   ui = fluidPage( theme = "classic",
     
     # App title
-     navbarPage("Streamflow Duration Assessment Method for the Arid West: Reporting Tool version 1.0",
+     navbarPage("Beta Streamflow Duration Assessment Method for the Arid West: Online Report Generating Tool Version 1.0",
        position = c("fixed-top")),
     
     # Adding padding due to pinning title at top
@@ -50,7 +50,7 @@ shinyApp(
     tabPanel(h4("Background Information"),
       br(),
       column(width = 6,
-        HTML("<p>This is a draft tool to calculate the interim Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. For more information, consult the <a href='https://www.epa.gov/streamflow-duration-assessment'>Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.<p>"),
+        HTML("<p>This is a draft tool to calculate the Beta Streamflow Duration Assessment Method (SDAM) developed for the Arid West region. Do not use for regulatory purposes without prior consulting with the EPA product delivery team. For more information, consult the <a href='https://www.epa.gov/streamflow-duration-assessment'>Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.<p>"),
         br(),
         HTML("<p>Streams may exhibit a diverse range of hydrologic regimes that strongly influence physical, chemical and biological characteristics of streams and their adjacent riparian areas. Such hydrologic information supports many management decisions. One important aspect of hydrologic regime is streamflow duration—the length of time that a stream supports sustained surface flow. However, requisite hydrologic data to determine flow duration is unavailable at most reaches nationwide. Although maps, hydrologic models, and other data resources exist (e.g., the <a href='https://www.usgs.gov/core-science-systems/ngp/national-hydrography/national-hydrography-dataset?qt-science_support_page_related_con=0#qt-science_support_page_related_con'>National Hydrography Dataset</a>), they may exclude small headwater streams, and limitations on accuracy and spatial or temporal resolution may reduce their utility for many management applications. Therefore, there is a need for rapid, field-based methods to determine flow duration class at the reach scale in the absence of long-term hydrologic data (e.g., <a href='https://www.mdpi.com/2073-4441/12/9/2545'>Fritz et al., 2020</a>).</p>"),
         br(),
@@ -61,7 +61,7 @@ shinyApp(
         br(),
         img(src="SDAMS.png", height="80%", width="80%"),
         br(),
-        HTML("<p>This online reporting tool allows application of the beta Streamflow Duration Assessment Method for the Arid West (SDAM AW), the EPA’s standard method for the Arid West region outside the Pacific Northwest (which is covered by method described in <a href='https://www.epa.gov/sites/production/files/2016-01/documents/streamflow_duration_assessment_method_pacific_northwest_2015.pdf'>Nadeau 2015</a>). The SDAM AW is based on the presence of biological indicators that are known to respond to gradients of streamflow duration. The first four indicators are evaluated together to assign a preliminary flow duration class to a reach, whereas the fifth indicator consists of <em>single indicators</em> whose presence determines that a reach is <em>at least intermittent</em>, either supporting or superseding the preliminary classification determined from the other four indicators. An <em>at least intermittent classification</em> indicates that the reach is not ephemeral, but the biological indicator data does not determine if the reach is perennial or intermittent with high confidence.<p>"),
+        HTML("<p>This online reporting tool allows application of the Beta Streamflow Duration Assessment Method for the Arid West (SDAM AW), the EPA’s standard method for the Arid West region outside the Pacific Northwest (which is covered by method described in <a href='https://www.epa.gov/sites/production/files/2016-01/documents/streamflow_duration_assessment_method_pacific_northwest_2015.pdf'>Nadeau 2015</a>). The SDAM AW is based on the presence of biological indicators that are known to respond to gradients of streamflow duration. The first four indicators are evaluated together to assign a preliminary flow duration class to a reach, whereas the fifth indicator consists of <em>single indicators</em> whose presence determines that a reach is <em>at least intermittent</em>, either supporting or superseding the preliminary classification determined from the other four indicators. An <em>at least intermittent classification</em> indicates that the reach is not ephemeral, but the biological indicator data does not determine if the reach is perennial or intermittent with high confidence.<p>"),
         br(),
         p("(1) How many hydrophytic plant species (up to five) are growing in the channel, or within one half-channel width of the channel?"),
         p("(2) How many aquatic macroinvertebrates are quantified during a 15-minute search?"),
@@ -69,7 +69,7 @@ shinyApp(
         p("(4) Are algae found on the streambed?"),
         p("(5) Are single indicators (i.e., the presence of fish or >10% algal cover) of intermittent or perennial streamflow duration observed?"),
         br(),
-        HTML("<p>This beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
+        HTML("<p>This Beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
         br(),
         HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
       )
@@ -220,8 +220,13 @@ shinyApp(
           br(),
           column(width = 12,
           column(width = 6,
-            HTML("<p>For additional information, please refer to the field manual and protocol developed for the Streamflow Duration Assessment Method for the Arid West. Field forms and additional materials can be found on <a href='https://www.epa.gov/streamflow-duration-assessment'>the Environmental Protection Agency's Streamflow Duration Assessment Methods homepage</a>.</p>")
+            HTML("<p>For additional information, please refer to the user manual developed for the Beta Streamflow Duration Assessment Method for the Arid West. Information about this method can be found on <a href='https://www.epa.gov/streamflow-duration-assessment/beta-streamflow-duration-assessment-method-arid-west'>the Environmental Protection Agency's Streamflow Duration Assessment Methods for the Arid West homepage</a>.</p>")
         )),
+          br(),
+          column(width = 12,
+               column(width = 6,
+                      HTML("<p>The user manual, training material, and other resources may be accessed from the <a href ='https://betasdamaw-sccwrp.hub.arcgis.com'> SDAM AW Training Website</a>.</p>")
+               )),
           br(),
           column(width = 12,
           column(width = 6,
