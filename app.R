@@ -228,10 +228,21 @@ shinyApp(
                       HTML("<p>The user manual, training material, and other resources may be accessed from the <a href ='https://betasdamaw-sccwrp.hub.arcgis.com'> SDAM AW Training Website</a>.</p>")
                )),
           br(),
+          column (
+            width =12,
+            column(width = 6,
+               HTML("<p>R code used to develop this application is available here: <a href =\"https://github.com/SCCWRP/beta_awsdam_report\"> https://github.com/SCCWRP/beta_awsdam_report. </a></p>"
+               )      
+            )
+          ),
+          br(),
           column(width = 12,
           column(width = 6,
             HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
-          )))
+          ),
+
+          
+          ))
         )),
   
 # Server ------------------------------------------------------------------
