@@ -69,10 +69,12 @@ shinyApp(
         p("(4) Are algae found on the streambed?"),
         p("(5) Are single indicators (i.e., the presence of fish or >10% algal cover) of intermittent or perennial streamflow duration observed?"),
         br(),
+        HTML("<p><strong>Note</strong>: In rare circumstances, this tool may incorrectly apply At least intermittent classifications to streams that could be ephemeral. If your data results in a classification of At least intermittent, please contact streamflow-duration-assessment@epa.gov. At this time, we do not recommend making management decisions based on At least intermittent classifications without first contacting streamflow-duration-assessment@epa.gov. Classifications of perennial, intermittent, and ephemeral are unaffected.</p>"),
         HTML("<p>This Beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
         br(),
         HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
-      )
+      
+        )
       ),
 
     tabPanel(h4("Enter Data"),
