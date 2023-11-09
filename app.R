@@ -47,7 +47,8 @@ shinyApp(
     # ),
                   
     # App title
-     navbarPage("Beta Streamflow Duration Assessment Method for the Arid West: Online Report Generating Tool Version 1.0",
+    # update to 1.1 on Nov 9, 2023
+     navbarPage("Beta Streamflow Duration Assessment Method for the Arid West: Online Report Generating Tool Version 1.1",
        position = c("fixed-top")),
     
     # Adding padding due to pinning title at top
@@ -83,7 +84,7 @@ shinyApp(
         p("(4) Are algae found on the streambed?"),
         p("(5) Are single indicators (i.e., the presence of fish or >10% algal cover) of intermittent or perennial streamflow duration observed?"),
         br(),
-        HTML("<p><strong>Note</strong>: In some circumstances, this tool may incorrectly apply “At least intermittent” and “Need more information” classifications to streams where other classifications should be applied. If your data results in a classification of “At least intermittent” or “Need more information”, please contact streamflow-duration-assessment@epa.gov. At this time, we do not recommend making management decisions based on “At least intermittent” classifications without first contacting streamflow-duration-assessment@epa.gov. Classifications of perennial, intermittent, and ephemeral are unaffected.</p>"),
+        HTML("<p><strong>NOTE:</strong>On November 16, 2023, this application was updated to correct errors in how <em>At least intermittent</em> or <em>Need more information</em> classifications were assigned. If you used this application prior to November 16, 2023 (app version 1.0), please rerun your data with the updated version (version 1.1). For more information about this update, please see <a href=https://www.epa.gov/streamflow-duration-assessment/beta-streamflow-duration-assessment-method-arid-west#How>https://www.epa.gov/streamflow-duration-assessment/beta-streamflow-duration-assessment-method-arid-west#How</a> or contact <a href=mailto:streamflow-duration-assessment@epa.gov>streamflow-duration-assessment@epa.gov</a>.</p>"),
         HTML("<p>This Beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
         br(),
         HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
