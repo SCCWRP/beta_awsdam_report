@@ -1,0 +1,10 @@
+name: beta_awsdam_report_dev
+title:
+username: sccwrp
+account: sccwrp
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10488371
+bundleId: 7913051
+url: https://sccwrp.shinyapps.io/beta_awsdam_report_dev/
+version: 1

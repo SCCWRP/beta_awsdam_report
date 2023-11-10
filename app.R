@@ -196,7 +196,7 @@ shinyApp(
     
     # algae input for determination
     checkboxInput("algae_checkbox", label = "Check if all observed algae appear to be deposited from an upstream source.", value = FALSE),  
-    radioButtons(inputId = "radio_algae", label = "Are algae found on the streambed? - select one of the below options", choices = list("Not detected" = 0, "Yes, <10% cover" = 1, "Yes, >10% cover" = 2), selected = 0),
+    radioButtons(inputId = "radio_algae", label = "Are algae found on the streambed? - select one of the below options", choices = list("Not detected" = 0, "Yes, ≤10% cover" = 1, "Yes, >10% cover" = 2), selected = 0),
     fileInput("alg1", label = HTML("Algae Photo #1<br />Upload photo file here.")), # file input box
     textInput("algnotes", label = h5("Notes on algae cover:"), value = "Enter text..."), # text input box
 
@@ -290,71 +290,9 @@ shinyApp(
     fig15 <- reactive({gsub("\\\\", "/", input$add2$datapath)})
     #fig16 <- reactive({gsub("\\\\", "/", input$alg_si1$datapath)})
     
-    # fig_map <- reactive({
-    #   site_data_react <- data.frame(input$waterway,
-    #     as.numeric(input$lat),
-    #     as.numeric(input$lon)) # create dataframe
-    # 
-    #   names(site_data_react) <- c("site", "lat", "lon") # rename columns
-    # 
-    #   site_rct_sf <- st_as_sf(site_data_react, # create sf dataframe
-    #     coords = c("lon", "lat"), # identify lon & lat
-    #     remove = F, # do not remove lat/lon columns
-    #     crs = 4326) # use WGS84 projection
-    #   
-    #   mapviewOptions(basemaps = "Esri.WorldImagery") # set output to ESRI map
-    #   
-    #   mapview::mapview(site_rct_sf, legend = FALSE) # adds in map
-    # 
-    # })
-    # 
-    # Code for stream classification determination (using random forest results)
-    # predict_flowduration <- reactive({
-    #   
-    #   # Convert all measure inputs to numerical values for use in our function.
-    #   hydrophytes <- as.numeric(input$radio_hydro)
-    #   EPT <- as.numeric(input$radio_ept)
-    #   BMI <- as.numeric(input$radio_bmi)
-    #   livedeadalg <- as.numeric(ifelse(input$radio_algae == 0, 0, 1)) # model results only take the binary yes/no, 1/0
-    #   SIalg <- as.numeric(ifelse(input$radio_algae == 0, 0,
-    #     ifelse(input$radio_algae == 1, 1, 2))) # need to account for two "yes" options in single indicators
-    #   SIfish <- as.numeric(input$fish)
-    #   
-    #   #assemble test data that will be input by the user
-    #   test.df<-data.frame(hydrophytes_3pa=hydrophytes,
-    #     EPT_pa=EPT,
-    #     BMI_20=BMI,
-    #     livedeadalg_pa=livedeadalg)
-    #   
-    #   #generates predictions based on random forest model outputs (frf_2) and used inputs (test.df) and flips from wide to long (1 column, 3 rows)
-    #   xdf <- predict(frf_2, newdata=test.df, type="prob") %>%
-    #     as.data.frame()
-    #   
-    #   # updated final determination of the greatest probability/classification, 2/3rds cutoff
-    #   mincut <-.667
-    #   
-    #   # create new column with "at least intermittent" category designation
-    #   xdf$pALI <- xdf$I + xdf$P
-    #   
-    #   # final determination
-    #   if(EPT==1 & BMI==0)
-    #     print("WARNING! Illogical invertebrate inputs.")
-    #   else
-    #     case_when(xdf$P>mincut~"Perennial",
-    #       xdf$I>mincut~"Intermittent",
-    #       xdf$E>mincut & SIfish==1 ~"At Least Intermittent", # either
-    #       xdf$E>mincut & SIalg==2 ~"At Least Intermittent", # or
-    #       xdf$E>mincut~"Ephemeral",
-    #       xdf$pALI>mincut~"At Least Intermittent",
-    #       xdf$pALI>mincut~"At Least Intermittent",
-    #       SIfish==1 ~ "At Least Intermittent", # either
-    #       SIalg==2 ~ "At Least Intermittent", # or
-    #       T~"Need more information")
-    # })
+
     
-    # hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 5,
-    
-    #If prediction is NMI or E, but there are single indicators present, prediction becomes "ALI".
+    #If prediction is NMI, LTP or E, but there are single indicators present, prediction becomes "ALI".
     
     # Based on indicator inputs, this will choose which table to display.
     predict_figure <- reactive({
@@ -363,48 +301,38 @@ shinyApp(
       hydro <- as.numeric(input$radio_hydro)
       BMI <- as.numeric(input$radio_bmi)
       EPT <- as.numeric(input$radio_ept)
-      SIalg <- ifelse(input$algae_checkbox == TRUE, 0, # Use checkbox to override.
-        as.numeric(ifelse(input$radio_algae == 0, 0,
-        ifelse(input$radio_algae == 1, 1, 2)))) 
+
+      SIalg <- case_when(
+        input$algae_checkbox == TRUE ~ 0, # Use checkbox to override
+        input$radio_algae < 2 ~ as.numeric(0),
+        input$radio_algae == 2 ~ as.numeric(1),
+        TRUE ~ NA_real_  # default case if needed
+      )
+
       SIfish <- as.numeric(ifelse(input$fish == 2, 1, 0))
+
+      SI_Present <- max(SIalg, SIfish, na.rm = TRUE)
       
-      # Going down list of 31 possible iterations.
+      # Going down list of possible iterations.
+      # Create a data frame using the provided data
+      possible.outcomes <- read.csv('data/outcomes.csv')
+
+      possible.outcomes %>% 
+        filter(
+          hydrophytes_3pa == hydro,
+          BMI_20 == BMI,
+          EPT_pa == EPT,
+          SI_Present == SI_Present
+        ) 
       
-      case_when(hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 1,
-        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 2,
-        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 1 & SIfish == 0 ~ 3,
-        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 1 & SIfish == 1 ~ 4,
-        hydro == 0 & BMI == 0 & EPT == 0 & SIalg == 2 ~ 4,
-        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 5,
-        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 6,
-        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 1 & SIfish == 0 ~ 7,
-        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 1 & SIfish == 1 ~ 8,
-        hydro == 0 & BMI == 0.5 & EPT == 0 & SIalg == 2 ~ 8,
-        hydro == 0 & BMI == 0.5 & EPT == 1 ~ 9,
-        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 10,
-        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 11,
-        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 1 & SIfish == 0 ~ 12,
-        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 1 & SIfish == 1 ~ 13,
-        hydro == 0 & BMI == 1 & EPT == 0 & SIalg == 2 ~ 13,
-        hydro == 0 & BMI == 1 & EPT == 1 ~ 14,
-        hydro == 0.5 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 15,
-        hydro == 0.5 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 16,
-        hydro == 0.5 & BMI == 0 & EPT == 0 & SIalg > 0 ~ 17,
-        hydro == 0.5 & BMI == 0.5 & EPT == 0 & SIalg == 0 ~ 18,
-        hydro == 0.5 & BMI == 0.5 & EPT == 0 & SIalg > 0 ~ 19,
-        hydro == 0.5 & BMI == 0.5 & EPT == 1 ~ 20,
-        hydro == 0.5 & BMI == 1 & EPT == 0 & SIalg == 0 ~ 21,
-        hydro == 0.5 & BMI == 1 & EPT == 0 & SIalg > 0 ~ 22,
-        hydro == 0.5 & BMI == 1 & EPT == 1 & SIalg == 0 ~ 23,
-        hydro == 0.5 & BMI == 1 & EPT == 1 & SIalg > 0 ~ 24,
-        hydro == 1 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 0 ~ 25,
-        hydro == 1 & BMI == 0 & EPT == 0 & SIalg == 0 & SIfish == 1 ~ 26,
-        hydro == 1 & BMI == 0 & EPT == 0 & SIalg > 0 ~ 27,
-        hydro == 1 & BMI == 0.5 & EPT == 0 ~ 28,
-        hydro == 1 & BMI == 0.5 & EPT == 1 ~ 29,
-        hydro == 1 & BMI == 1 & EPT == 0 ~ 30,
-        hydro == 1 & BMI == 1 & EPT == 1 ~ 31)
-      
+      print("possible.outcomes")
+      print(possible.outcomes)
+      print("possible.outcomes$FinalClassification[1]")
+      print(possible.outcomes$FinalClassification[1])
+
+      # function will return this
+      possible.outcomes$FinalClassification[1]
+
     })
     
     
@@ -500,7 +428,7 @@ shinyApp(
             input$radio_situation == 7~"None"),
           bo = input$hydro_comments,
           #rf = predict_flowduration(),
-          tbl = predict_figure()#,
+          classification = predict_figure()#,
           #fig_map = fig_map()
           )
         
