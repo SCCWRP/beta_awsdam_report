@@ -228,7 +228,7 @@ shinyApp(
     br(), # line break
     textInput("add_notes", label = h5("Additional Notes about the Assessment"), value = "Enter text..."), # text input box
     
-    downloadButton("report", "Generate report.")
+    downloadButton("report", "Generate report")
   ),
         
         # 3rd tab
@@ -301,6 +301,12 @@ shinyApp(
       hydro <- as.numeric(input$radio_hydro)
       BMI <- as.numeric(input$radio_bmi)
       EPT <- as.numeric(input$radio_ept)
+      AlgPA <- case_when(
+        input$algae_checkbox == TRUE ~ 0, # Use checkbox to override
+        input$radio_algae < 1 ~ as.numeric(0),
+        input$radio_algae >= 1 ~ as.numeric(1),
+        TRUE ~ NA_real_  # default case if needed
+      )
 
       SIalg <- case_when(
         input$algae_checkbox == TRUE ~ 0, # Use checkbox to override
@@ -317,21 +323,31 @@ shinyApp(
       # Create a data frame using the provided data
       possible.outcomes <- read.csv('data/outcomes.csv')
 
-      possible.outcomes %>% 
+      print("possible.outcomes")
+      print(possible.outcomes)
+      print("hydro")
+      print(hydro)
+      print("BMI")
+      print(BMI)
+      print("EPT")
+      print(EPT)
+      print("SI_Present")
+      print(SI_Present)
+
+      classdf <- possible.outcomes %>% 
         filter(
           hydrophytes_3pa == hydro,
           BMI_20 == BMI,
           EPT_pa == EPT,
+          livedeadalg_pa == AlgPA,
           SI_Present == SI_Present
         ) 
       
-      print("possible.outcomes")
-      print(possible.outcomes)
-      print("possible.outcomes$FinalClassification[1]")
-      print(possible.outcomes$FinalClassification[1])
+      print("classdf$FinalClassification[1]")
+      print(classdf$FinalClassification[1])
 
       # function will return this
-      possible.outcomes$FinalClassification[1]
+      classdf$FinalClassification[1]
 
     })
     
@@ -339,6 +355,15 @@ shinyApp(
     output$report <- downloadHandler(
       filename = "AWSDAM_report.pdf",
       content = function(file) {
+        
+        # Show modal with loader
+        showModal(modalDialog(
+          title = "Processing",
+          "Generating report",
+          easyClose = FALSE,
+          footer = NULL
+        ))
+
         # Copy the report file to a temporary directory before processing it, in
         # case we don't have write permissions to the current working dir (which
         # can happen when deployed).
@@ -435,10 +460,17 @@ shinyApp(
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
         # from the code in this app).
-        rmarkdown::render(tempReport, output_file = file,
+        out <- rmarkdown::render(tempReport, output_file = file,
           params = params,
           envir = new.env(parent = globalenv())
         )
+
+        # remove the modal
+        removeModal()
+
+        # return the rendered knitted R Markdown file
+        out
+
       }
     )
   }
