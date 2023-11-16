@@ -48,7 +48,7 @@ shinyApp(
                   
     # App title
     # update to 1.1 on Nov 9, 2023
-     navbarPage("Beta Streamflow Duration Assessment Method for the Arid West: Online Report Generating Tool Version 1.1",
+     navbarPage(HTML("Beta Streamflow Duration Assessment Method for the Arid West: Online Report Generating Tool <a href=https://github.com/SCCWRP/beta_awsdam_report target=_blank>Version 1.1</a>"),
        position = c("fixed-top")),
     
     # Adding padding due to pinning title at top
@@ -84,7 +84,7 @@ shinyApp(
         p("(4) Are algae found on the streambed?"),
         p("(5) Are single indicators (i.e., the presence of fish or >10% algal cover) of intermittent or perennial streamflow duration observed?"),
         br(),
-        HTML("<p><strong>NOTE:</strong>On November 16, 2023, this application was updated to correct errors in how <em>At least intermittent</em> or <em>Need more information</em> classifications were assigned. If you used this application prior to November 16, 2023 (app version 1.0), please rerun your data with the updated version (version 1.1). For more information about this update, please see <a href=https://www.epa.gov/streamflow-duration-assessment/beta-streamflow-duration-assessment-method-arid-west#How>https://www.epa.gov/streamflow-duration-assessment/beta-streamflow-duration-assessment-method-arid-west#How</a> or contact <a href=mailto:streamflow-duration-assessment@epa.gov>streamflow-duration-assessment@epa.gov</a>.</p>"),
+        HTML("<p><strong>Note:</strong> Prior to version 1.1 released on November 16, 2023,  the beta SDAM for the AW incorrectly applied the “At least intermittent” and “Need more information” classifications to streams where other classifications should have been applied. If your data resulted in a classification of “At least intermittent” or “Need more information” using version 1.0 of the model please check your classification using version 1.1. Classifications of perennial, intermittent, and ephemeral from version 1.0 are unaffected.</p>"),
         HTML("<p>This Beta method will be updated as more data are collected. For further information about streamflow duration assessment methods, refer to the <a href='https://www.epa.gov/streamflow-duration-assessment'>EPA website</a>.<p>"),
         br(),
         HTML("<p>For additional support with this website, please contact Dr. Raphael Mazor (raphaelm@sccwrp.org) at the Southern California Coastal Water Research Project.</p>")
@@ -94,7 +94,8 @@ shinyApp(
 
     tabPanel(h4("Enter Data"),
       br(),
-      
+      # Disclaimer -------
+      div(HTML('<p style="color:#e32431;"><em>This is an analysis tool and does not store data. After 60 minutes the tool will timeout and all data will have to be re-entered.</em></p>') ),
     # General Info ------------------------------------------------------------
       
     h3("General Site Information"), # Adds section header
