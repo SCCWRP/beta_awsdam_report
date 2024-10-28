@@ -21,6 +21,10 @@ library(htmlwidgets)
 library(webshot)
 library(knitr)
 
+# Increase file upload size limit
+options(shiny.maxRequestSize = 100 * 1024^2)  # Set to 100 MB
+
+
 # Load dataset for random forest model
 load("FinalRF.Rdata")
 
